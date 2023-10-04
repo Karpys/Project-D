@@ -1,4 +1,5 @@
 ﻿using System;
+using TweenCustom;
 using UnityEditor.Animations;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace KarpysDev.Script.Player
         [Header("Parameters")] 
         [SerializeField] private float m_Speed = 0;
         [SerializeField] private float m_DistanceToStop = 0;
+        [SerializeField] private float m_RotationOffset = 0;
 
         private Vector3 m_Destination = Vector3.zero;
         private bool m_NeedToReachDestination = false;
@@ -42,20 +44,25 @@ namespace KarpysDev.Script.Player
                 if (Physics.Raycast(point, out RaycastHit info))
                 {
                     Transform playerRootTransform = m_PlayerRoot.transform;
-                    Vector3 newPosition = new Vector3(info.point.x, playerRootTransform.position.y, info.point.z);
+                    Vector3 playerPosition = playerRootTransform.position;
+                    Vector3 newPosition = new Vector3(info.point.x, playerPosition.y, info.point.z);
                     m_Destination = newPosition;
                     m_NeedToReachDestination = true;
-                    m_PlayerAnimation.PlayAnimation("Running");
+                    m_PlayerAnimation.PlayAnimation("Walk");
+                    
+                    Vector3 direction = playerPosition - m_Destination;
+                    float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+                    playerRootTransform.DoPivotRotate(angle + m_RotationOffset,0.2f);
                 }
             }
         }
 
         private void MoveTowardsDestination()
         {
-            Vector3 newDestination = Vector3.MoveTowards(m_PlayerRoot.position,m_Destination,m_Speed * Time.deltaTime);
-            m_PlayerRoot.transform.position = newDestination;
+            Vector3 newDestination = Vector3.MoveTowards(transform.position,m_Destination,m_Speed * Time.deltaTime);
+            transform.position = newDestination;
 
-            if (Vector3.Distance(m_PlayerRoot.transform.position, m_Destination) <= m_DistanceToStop)
+            if (Vector3.Distance(transform.position, m_Destination) <= m_DistanceToStop)
             {
                 m_NeedToReachDestination = false;
                 m_PlayerAnimation.PlayAnimation("Idle");

@@ -45,6 +45,13 @@ namespace TweenCustom
             TweenManager.Instance.AddTween(baseTween);
             return baseTween;
         }
+        
+        public static BaseTween DoPivotRotate(this Transform trans, float endValue,float duration)
+        {
+            TweenPivotRotate baseTween = new TweenPivotRotate(trans, endValue, duration);
+            TweenManager.Instance.AddTween(baseTween);
+            return baseTween;
+        }
 
         public static BaseTween DoScale(this Transform trans, Vector3 endValue, float duration)
         {
@@ -167,5 +174,41 @@ namespace TweenCustom
         }
 
         #endregion
+    }
+
+    public class TweenPivotRotate : BaseTween
+    {
+        public TweenPivotRotate(Transform target,float endValue,float duration)
+        {
+            m_Target = target;
+            m_Duration = duration;
+            m_EndValue.y = endValue;
+            m_StartValue.y = target.eulerAngles.y;
+            
+            if (Mathf.Abs(m_StartValue.y - m_EndValue.y) > 180)
+            {
+                if (m_StartValue.y > 180 && m_EndValue.y < 180)
+                {
+                    m_StartValue.y -= 360f;
+                }
+            }
+        }
+
+        protected override void Update()
+        {
+            Vector3 eulerAngles = m_Target.eulerAngles;
+            eulerAngles = new Vector3(eulerAngles.x, NewAngle(), eulerAngles.z);
+            m_Target.eulerAngles = eulerAngles;
+        }
+
+        private float NewAngle()
+        {
+            return Mathf.LerpUnclamped(m_StartValue.y, m_EndValue.y, (float)Evaluate());
+        }
+
+        public override void TweenRefreshStartValue()
+        {
+            m_StartValue = m_Target.eulerAngles;
+        }
     }
 }
