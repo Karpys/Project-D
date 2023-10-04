@@ -74,6 +74,7 @@ namespace KarpysDev.Script.Player
                 m_NeedToReachDestination = true;
                 m_PlayerAnimation.PlayAnimation("Walk");
                 m_LookAt.SetTarget(target);
+                m_LookAt.Active(true);
                 return true;
             }
 
@@ -92,11 +93,12 @@ namespace KarpysDev.Script.Player
                 m_PlayerAnimation.PlayAnimation("Walk");
                     
                 m_LookAt.SetPoint(m_Destination);
-                //Vector3 direction = playerPosition - m_Destination;
-                //float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+                m_LookAt.Active(true);
+                
                 //playerRootTransform.DoPivotRotate(angle + m_RotationOffset,0.2f);
 
                 m_TransformTarget = null;
+                m_LookAt.SetTarget(null);
             }
         }
 
@@ -106,7 +108,6 @@ namespace KarpysDev.Script.Player
 
             if (Vector3.Distance(transform.position, m_Destination) <= m_DistanceToStop)
             {
-                m_LookAt.Stop();
                 m_NeedToReachDestination = false;
                 m_PlayerAnimation.PlayAnimation("Idle");
             }

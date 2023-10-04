@@ -301,8 +301,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d711f4fcd247bd94fb7f340d9496d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Body: {fileID: 489374196}
   m_Tranform: {fileID: 871874475}
   m_Active: 1
+  m_Offset: 90
+  m_RotationSpeed: 720
 --- !u!114 &489374199
 MonoBehaviour:
   m_ObjectHideFlags: 0
