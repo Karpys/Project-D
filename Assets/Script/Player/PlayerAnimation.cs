@@ -21,6 +21,7 @@ namespace KarpysDev.Script.Player
         
         public void PlayAnimation(string animationName)
         {
+            Debug.Log("Animation to play: " + animationName);
             m_AnimationToPlay = animationName;
         }
     }

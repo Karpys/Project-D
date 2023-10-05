@@ -17,6 +17,7 @@ namespace KarpysDev.Script.Player
         [Header("Parameters")] 
         [SerializeField] private float m_Speed = 0;
         [SerializeField] private float m_DistanceToStop = 0;
+        [SerializeField] private float m_AttackRange = 0;
         [SerializeField] private float m_RotationOffset = 0;
         [SerializeField] private LayerMask m_EnemyLayerMask;
 
@@ -121,10 +122,13 @@ namespace KarpysDev.Script.Player
         {
             Vector3 newDestination = Vector3.MoveTowards(transform.position,m_TransformTarget.position,m_Speed * Time.deltaTime);
             
-            if (Vector3.Distance(transform.position, m_TransformTarget.position) <= m_DistanceToStop)
+            if (Vector3.Distance(transform.position, m_TransformTarget.position) <= m_AttackRange)
             {
                 //m_NeedToReachDestination = false;
-                m_PlayerAnimation.PlayAnimation("Idle");
+                m_PlayerAnimation.PlayAnimation("Attack");
+                //Set Attacking Value//
+                //Return if attacking//
+                m_NeedToReachDestination = false;
             }
             else
             {
