@@ -73,7 +73,7 @@ namespace KarpysDev.Script.Player
                 Transform target = targetable.GetPivot;
                 m_TransformTarget = target;
                 m_NeedToReachDestination = true;
-                m_PlayerAnimation.PlayAnimation("Walk");
+                m_PlayerAnimation.PlayBotAnimation("Walk");
                 m_LookAt.SetTarget(target);
                 m_LookAt.Active(true);
                 return true;
@@ -91,7 +91,7 @@ namespace KarpysDev.Script.Player
                 Vector3 newPosition = new Vector3(info.point.x, playerPosition.y, info.point.z);
                 m_Destination = newPosition;
                 m_NeedToReachDestination = true;
-                m_PlayerAnimation.PlayAnimation("Walk");
+                m_PlayerAnimation.PlayBotAnimation("Walk");
                     
                 m_LookAt.SetPoint(m_Destination);
                 m_LookAt.Active(true);
@@ -110,7 +110,7 @@ namespace KarpysDev.Script.Player
             if (Vector3.Distance(transform.position, m_Destination) <= m_DistanceToStop)
             {
                 m_NeedToReachDestination = false;
-                m_PlayerAnimation.PlayAnimation("Idle");
+                m_PlayerAnimation.PlayBotAnimation("Idle");
             }
             else
             {
@@ -125,7 +125,8 @@ namespace KarpysDev.Script.Player
             if (Vector3.Distance(transform.position, m_TransformTarget.position) <= m_AttackRange)
             {
                 //m_NeedToReachDestination = false;
-                m_PlayerAnimation.PlayAnimation("Attack");
+                m_PlayerAnimation.PlayTopAnimation("Attack",0.25f);
+                m_PlayerAnimation.PlayBotAnimation("Idle",0.25f);
                 //Set Attacking Value//
                 //Return if attacking//
                 m_NeedToReachDestination = false;
