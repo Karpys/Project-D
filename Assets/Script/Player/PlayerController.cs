@@ -25,9 +25,21 @@ namespace KarpysDev.Script.Player
         private bool m_NeedToReachDestination = false;
 
         private Transform m_TransformTarget = null;
-        
+
+        public Action OnMovement = null;
+
+        private AutoAttack m_AutoAttack = null;
+
+        public PlayerAnimation PlayerAnimation => m_PlayerAnimation;
+        private void Awake()
+        {
+            m_AutoAttack = new AutoAttack(this,0.5f,0.2f);
+        }
+
         private void Update()
         {
+            m_AutoAttack.Update();
+            
             PlayerInput();
 
             PlayerActionUpdate();
@@ -69,6 +81,7 @@ namespace KarpysDev.Script.Player
         {
             if (Physics.Raycast(point, out RaycastHit info, 1000, m_EnemyLayerMask))
             {
+                OnMovement?.Invoke();
                 ITargetable targetable = info.collider.gameObject.GetComponent<ITargetable>();
                 Transform target = targetable.GetPivot;
                 m_TransformTarget = target;
@@ -86,6 +99,7 @@ namespace KarpysDev.Script.Player
         {
             if (Physics.Raycast(point, out RaycastHit info))
             {
+                OnMovement?.Invoke();
                 Transform playerRootTransform = m_PlayerRoot.transform;
                 Vector3 playerPosition = playerRootTransform.position;
                 Vector3 newPosition = new Vector3(info.point.x, playerPosition.y, info.point.z);
@@ -124,17 +138,18 @@ namespace KarpysDev.Script.Player
             
             if (Vector3.Distance(transform.position, m_TransformTarget.position) <= m_AttackRange)
             {
-                //m_NeedToReachDestination = false;
-                m_PlayerAnimation.PlayTopAnimation("Attack",0.25f);
-                m_PlayerAnimation.PlayBotAnimation("Idle",0.25f);
-                //Set Attacking Value//
-                //Return if attacking//
-                m_NeedToReachDestination = false;
+                if(m_AutoAttack.AutoAttackClock.IsReady)
+                    TryLaunchAutoAttack();
             }
             else
             {
                 transform.position = newDestination;
             }
+        }
+
+        private void TryLaunchAutoAttack()
+        {
+            m_AutoAttack.LaunchAuto();
         }
     }
 
