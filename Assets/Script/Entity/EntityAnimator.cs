@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace KarpysDev.Script.Player
 {
-    public class PlayerAnimation : MonoBehaviour
+    public class EntityAnimator : MonoBehaviour
     {
         [SerializeField] private Animator m_Animator = null;
         
