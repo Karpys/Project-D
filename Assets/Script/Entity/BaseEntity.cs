@@ -16,7 +16,7 @@ namespace KarpysDev.Script.Behaviour
 
         public Action OnInterupt = null;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             m_Source = new EntitySource(this, m_Animator, m_Root);
         }

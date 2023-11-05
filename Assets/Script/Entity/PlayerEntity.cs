@@ -13,8 +13,9 @@ namespace KarpysDev.Script.Behaviour
 
         public AutoAttack AutoAttack => m_AutoAttack;
         public Ability SpinAuto => m_SpinAuto;
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             m_AutoAttack = new AutoAttack(m_Source,0.5f,0.2f);
             m_SpinAuto = new SpinAuto(m_Source,m_LookAt);
         }
