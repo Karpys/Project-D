@@ -1,20 +1,22 @@
-﻿namespace KarpysDev.Script.Behaviour
+﻿using KarpysDev.Script.Damage;
+
+namespace KarpysDev.Script.Behaviour
 {
     public abstract class Ability
     {
-        protected BaseEntity m_Entity = null;
-        
-        public Ability(BaseEntity entity)
+        protected ISource m_Source = null;
+
+        protected Ability(ISource source)
         {
-            m_Entity = entity;
+            m_Source = source;
         }
-        
+
         protected abstract void Trigger();
         protected abstract bool CanTrigger();
 
         public void CastAbility()
         {
-            if(CanTrigger())
+            if (CanTrigger())
                 Trigger();
         }
     }

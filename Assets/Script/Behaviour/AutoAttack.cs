@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using KarpysDev.Script.Damage;
 using KarpysDev.Script.Player;
 using KarpysDev.Script.Widget;
 using UnityEngine;
@@ -15,9 +16,10 @@ namespace KarpysDev.Script.Behaviour
 
         private bool m_IsCancelled = false;
 
-        public AutoAttack(BaseEntity entity,float attackSpeed,float attackLockNeeded):base(entity)
+        public AutoAttack(ISource source,float attackSpeed,float attackLockNeeded):base(source)
         {
-            m_Controller = entity;
+            if(source is EntitySource entitySource)
+                m_Controller = entitySource.Entity;
             m_AutoAttackClock = new Clocker(attackSpeed);
             m_AttackLockNeeded = attackLockNeeded;
         }

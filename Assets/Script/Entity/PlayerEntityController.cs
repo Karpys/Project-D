@@ -18,7 +18,7 @@ namespace KarpysDev.Script.Player
 
         private void PlayerInput()
         {
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButton(1))
             {
                 Ray point = m_PointCamera.ScreenPointToRay(Input.mousePosition);
                 if (!TargetCheck(point))
@@ -46,7 +46,7 @@ namespace KarpysDev.Script.Player
                 m_PlayerEntity.OnInterupt?.Invoke();
                 m_TransformTarget = target;
                 m_NeedToReachDestination = true;
-                m_PlayerAnimation.PlayBotAnimation("Walk");
+                m_PlayerAnimation.PlayOrContinueBotAnimation("Walk");
                 m_LookAt.SetTarget(target);
                 m_LookAt.Active(true);
                 return true;
@@ -65,7 +65,7 @@ namespace KarpysDev.Script.Player
                 m_PlayerEntity.OnInterupt?.Invoke();
                 m_Destination = newPosition;
                 m_NeedToReachDestination = true;
-                m_PlayerAnimation.PlayBotAnimation("Walk");
+                m_PlayerAnimation.PlayOrContinueBotAnimation("Walk");
                     
                 m_LookAt.SetPoint(m_Destination);
                 m_LookAt.Active(true);

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using KarpysDev.Script.Damage;
+using UnityEngine;
 
 namespace KarpysDev.Script.Behaviour
 {
@@ -14,11 +15,11 @@ namespace KarpysDev.Script.Behaviour
         public Ability SpinAuto => m_SpinAuto;
         private void Awake()
         {
-            m_AutoAttack = new AutoAttack(this,0.5f,0.2f);
-            m_SpinAuto = new SpinAuto(this, m_LookAt);
+            m_AutoAttack = new AutoAttack(m_Source,0.5f,0.2f);
+            m_SpinAuto = new SpinAuto(m_Source,m_LookAt);
         }
 
-        private void Update()
+        public void Update()
         {
             m_AutoAttack.Update();
         }
