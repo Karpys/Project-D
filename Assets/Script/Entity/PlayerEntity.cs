@@ -1,4 +1,5 @@
 ﻿using KarpysDev.Script.Damage;
+using KarpysDev.Script.Player;
 using UnityEngine;
 
 namespace KarpysDev.Script.Behaviour
@@ -7,6 +8,7 @@ namespace KarpysDev.Script.Behaviour
     {
         [Header("Player Entity Specifics")]
         [SerializeField] private LookAt m_LookAt = null;
+        [SerializeField] private PlayerEntityController m_EntityController = null;
         
         private AutoAttack m_AutoAttack = null;
         private Ability m_SpinAuto = null;
@@ -16,7 +18,7 @@ namespace KarpysDev.Script.Behaviour
         protected override void Awake()
         {
             base.Awake();
-            m_AutoAttack = new AutoAttack(m_Source,0.5f,0.2f);
+            m_AutoAttack = new AutoAttack(m_Source,m_EntityController,0.5f,0.2f);
             m_SpinAuto = new SpinAuto(m_Source,m_LookAt);
         }
 

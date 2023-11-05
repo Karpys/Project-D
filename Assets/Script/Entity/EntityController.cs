@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace KarpysDev.Script.Player
 {
-    public class EntityController : MonoBehaviour
+    public class EntityController : MonoBehaviour,ITargetProvider
     {
         [Header("References")] 
         [SerializeField] protected Transform m_EntityRoot = null;
@@ -23,7 +23,8 @@ namespace KarpysDev.Script.Player
         protected ITargetable m_CurrentTargetable = null;
 
         public EntityAnimator Animator => m_PlayerAnimation;
-        
+        public ITargetable Targetable => m_CurrentTargetable;
+
 
         protected void Update()
         {

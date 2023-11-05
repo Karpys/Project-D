@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Animator: {fileID: 939207989913327858}
   m_Root: {fileID: 939207990670714542}
   m_LookAt: {fileID: 939207989913327859}
+  m_EntityController: {fileID: 2185555139029155111}
 --- !u!114 &2185555139029155111
 MonoBehaviour:
   m_ObjectHideFlags: 0

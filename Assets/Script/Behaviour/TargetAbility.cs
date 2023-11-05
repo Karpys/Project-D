@@ -6,14 +6,20 @@ namespace KarpysDev.Script.Behaviour
     public abstract class TargetAbility : Ability
     {
         protected ITargetable m_Targetable = null;
-        protected TargetAbility(ISource source) : base(source)
+        protected ITargetProvider m_TargetProvider = null;
+        protected TargetAbility(ISource source,ITargetProvider targetProvider) : base(source)
         {
-            
+            m_TargetProvider = targetProvider;
         }
 
-        public void SetTarget(ITargetable targetable)
+        protected override void Trigger()
         {
-            m_Targetable = targetable;
+            m_Targetable = m_TargetProvider.Targetable;
+        }
+
+        protected override bool CanTrigger()
+        {
+            return m_TargetProvider.Targetable != null;
         }
     }
 }

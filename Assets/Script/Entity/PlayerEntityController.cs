@@ -77,8 +77,6 @@ namespace KarpysDev.Script.Player
             m_CurrentTargetable = targetable;
             m_LookAt.SetTarget(targetable.GetPivot);
             m_LookAt.Active(true);
-            
-            m_PlayerEntity.AutoAttack.SetTarget(m_CurrentTargetable);
         }
         
         protected override void OnTargetReached()
@@ -93,5 +91,10 @@ namespace KarpysDev.Script.Player
         {
             m_PlayerEntity.AutoAttack.CastAbility();
         }
+    }
+
+    public interface ITargetProvider
+    {
+        public ITargetable Targetable {get;}
     }
 }

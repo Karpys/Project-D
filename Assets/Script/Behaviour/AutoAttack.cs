@@ -12,11 +12,10 @@ namespace KarpysDev.Script.Behaviour
         private Clocker m_AutoAttackClock = null;
         private Clock m_LaunchAction = null;
         private float m_AttackLockNeeded = 0f;
-
-
+        
         private bool m_IsCancelled = false;
 
-        public AutoAttack(ISource source,float attackSpeed,float attackLockNeeded):base(source)
+        public AutoAttack(ISource source,ITargetProvider targetProvider,float attackSpeed,float attackLockNeeded):base(source,targetProvider)
         {
             if(source is EntitySource entitySource)
                 m_Controller = entitySource.Entity;
@@ -39,7 +38,7 @@ namespace KarpysDev.Script.Behaviour
 
         protected override bool CanTrigger()
         {
-            return m_AutoAttackClock.IsReady;
+            return base.CanTrigger() && m_AutoAttackClock.IsReady;
         }
 
         private void Cancelled()
@@ -63,7 +62,7 @@ namespace KarpysDev.Script.Behaviour
                 return;
             }
 
-            if (m_Targetable is IDamageTargetable damageTargetable)
+            if (m_TargetProvider.Targetable is IDamageTargetable damageTargetable)
             {
                 damageTargetable.DamageReceiver.ReceiveDamage(new DamageSource(50f,DamageType.Physical),m_Source);
                 Debug.Log("Apply Damage");
