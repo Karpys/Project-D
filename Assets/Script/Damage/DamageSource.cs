@@ -16,7 +16,7 @@
 
         public override string ToString()
         {
-            return m_DamageType.ToString() + " " + m_Damage;
+            return  m_Damage + " " + m_DamageType;
         }
     }
 }

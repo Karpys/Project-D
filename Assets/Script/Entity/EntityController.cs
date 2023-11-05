@@ -20,7 +20,7 @@ namespace KarpysDev.Script.Player
         protected Vector3 m_Destination = Vector3.zero;
         protected bool m_NeedToReachDestination = false;
 
-        protected Transform m_TransformTarget = null;
+        protected ITargetable m_CurrentTargetable = null;
 
         public EntityAnimator Animator => m_PlayerAnimation;
         
@@ -36,7 +36,7 @@ namespace KarpysDev.Script.Player
         {
             if (m_NeedToReachDestination)
             {
-                if(!m_TransformTarget)
+                if(m_CurrentTargetable == null)
                     MoveTowardsDestination();
                 else
                 {
@@ -68,9 +68,9 @@ namespace KarpysDev.Script.Player
         
         private void MoveTowardsTarget()
         {
-            Vector3 newDestination = Vector3.MoveTowards(transform.position,m_TransformTarget.position,m_Speed * Time.deltaTime);
+            Vector3 newDestination = Vector3.MoveTowards(transform.position,m_CurrentTargetable.GetPivot.position,m_Speed * Time.deltaTime);
             
-            if (Vector3.Distance(transform.position, m_TransformTarget.position) <= m_AttackRange)
+            if (Vector3.Distance(transform.position, m_CurrentTargetable.GetPivot.position) <= m_AttackRange)
             {
                 OnTargetReached();
             }
@@ -82,10 +82,4 @@ namespace KarpysDev.Script.Player
 
         protected virtual void OnTargetReached(){}
     }
-
-    public interface ITargetable
-    {
-        Transform GetPivot { get; }
-    }
-    
 }

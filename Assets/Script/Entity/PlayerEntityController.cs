@@ -32,23 +32,19 @@ namespace KarpysDev.Script.Player
                 m_PlayerEntity.SpinAuto.CastAbility();
             }
         }
-
         private bool TargetCheck(Ray point)
         {
             if (Physics.Raycast(point, out RaycastHit info, 1000, m_EnemyLayerMask))
             {
                 ITargetable targetable = info.collider.gameObject.GetComponent<ITargetable>();
-                Transform target = targetable.GetPivot;
 
-                if (target == m_TransformTarget)
+                if (targetable == m_CurrentTargetable)
                     return true;
                 
                 m_PlayerEntity.OnInterupt?.Invoke();
-                m_TransformTarget = target;
                 m_NeedToReachDestination = true;
                 m_PlayerAnimation.PlayOrContinueBotAnimation("Walk");
-                m_LookAt.SetTarget(target);
-                m_LookAt.Active(true);
+                SetTarget(targetable);
                 return true;
             }
 
@@ -71,16 +67,25 @@ namespace KarpysDev.Script.Player
                 m_LookAt.Active(true);
                 
                 //playerRootTransform.DoPivotRotate(angle + m_RotationOffset,0.2f);
-
-                m_TransformTarget = null;
+                m_CurrentTargetable = null;
                 m_LookAt.SetTarget(null);
             }
+        }
+
+        private void SetTarget(ITargetable targetable)
+        {
+            m_CurrentTargetable = targetable;
+            m_LookAt.SetTarget(targetable.GetPivot);
+            m_LookAt.Active(true);
+            
+            m_PlayerEntity.AutoAttack.SetTarget(m_CurrentTargetable);
         }
         
         protected override void OnTargetReached()
         {
             base.OnTargetReached();
             
+            m_PlayerAnimation.PlayOrContinueBotAnimation("Idle",0.25f);
             TryLaunchAutoAttack();
         }
         

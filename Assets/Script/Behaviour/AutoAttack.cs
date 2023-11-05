@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace KarpysDev.Script.Behaviour
 {
-    public class AutoAttack:Ability,IUpdater
+    public class AutoAttack:TargetAbility,IUpdater
     {
         private BaseEntity m_Controller = null;
         private Clocker m_AutoAttackClock = null;
@@ -28,10 +28,13 @@ namespace KarpysDev.Script.Behaviour
         {
             m_IsCancelled = false;
             m_AutoAttackClock.Launch();
-            m_Controller.Animator.PlayTopAnimation("Attack",0.25f);
-            m_Controller.Animator.PlayBotAnimation("Idle",0.25f);
-            m_Controller.OnInterupt += Cancelled;
             m_LaunchAction = new Clock(m_AttackLockNeeded, ApplyDamage);
+            
+            if (m_Controller)
+            {
+                m_Controller.Animator.PlayTopAnimation("Attack",0.25f);
+                m_Controller.OnInterupt += Cancelled;
+            }
         }
 
         protected override bool CanTrigger()
@@ -59,7 +62,12 @@ namespace KarpysDev.Script.Behaviour
                 m_Controller.OnInterupt -= Cancelled;
                 return;
             }
-            Debug.Log("Apply Damage");
+
+            if (m_Targetable is IDamageTargetable damageTargetable)
+            {
+                damageTargetable.DamageReceiver.ReceiveDamage(new DamageSource(50f,DamageType.Physical),m_Source);
+                Debug.Log("Apply Damage");
+            }
         }
     }
 }

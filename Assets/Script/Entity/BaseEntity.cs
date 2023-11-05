@@ -23,7 +23,7 @@ namespace KarpysDev.Script.Behaviour
 
         public void ReceiveDamage(DamageSource damageSource,ISource source)
         {
-            Debug.Log("Entity lose hp :" + damageSource);
+            Debug.Log(gameObject.name + " lose hp : " + damageSource);
 
             if (source is EntitySource entitySource)
             {
