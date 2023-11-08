@@ -8,7 +8,7 @@ namespace KarpysDev.Script.Behaviour
     {
         private BaseEntity m_Controller = null;
         private LookAt m_LookAt = null;
-        public SpinAuto(ISource source,LookAt lookAt) : base(source)
+        public SpinAuto(ISource source, SpellRule spellRule, LookAt lookAt) : base(source,spellRule)
         {
             if (source is EntitySource entitySource)
                 m_Controller = entitySource.Entity;
@@ -26,9 +26,14 @@ namespace KarpysDev.Script.Behaviour
             });
         }
 
-        protected override bool CanTrigger()
+        protected override bool IsSpellCanBeCast()
         {
             return true;
+        }
+
+        protected override bool IsRuleComplete()
+        {
+            return m_SpellRule.IsCompelte;
         }
 
         public void ApplyDamage(IDamageReceiver damageReceiver)

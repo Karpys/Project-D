@@ -8,7 +8,6 @@ namespace KarpysDev.Script.Behaviour
     {
         [Header("Player Entity Specifics")]
         [SerializeField] private LookAt m_LookAt = null;
-        [SerializeField] private PlayerEntityController m_EntityController = null;
         
         private AutoAttack m_AutoAttack = null;
         private Ability m_SpinAuto = null;
@@ -18,8 +17,8 @@ namespace KarpysDev.Script.Behaviour
         protected override void Awake()
         {
             base.Awake();
-            m_AutoAttack = new AutoAttack(m_Source,m_EntityController,0.5f,0.2f);
-            m_SpinAuto = new SpinAuto(m_Source,m_LookAt);
+            m_AutoAttack = new AutoAttack(m_Source,new PlayerPointTargetableSpellRule(transform,m_AttackRange,m_Controller),0.5f,0.2f);
+            m_SpinAuto = new SpinAuto(m_Source,new NoRule(),m_LookAt);
         }
 
         public void Update()

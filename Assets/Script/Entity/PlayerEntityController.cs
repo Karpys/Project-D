@@ -7,7 +7,8 @@ namespace KarpysDev.Script.Player
     {
         [SerializeField] private PlayerEntity m_PlayerEntity = null;
         [SerializeField] private Camera m_PointCamera = null;
-       
+        [SerializeField] protected LayerMask m_EnemyLayerMask;
+
 
         protected override void EntityActionUpdate()
         {
@@ -30,8 +31,12 @@ namespace KarpysDev.Script.Player
             if (Input.GetKeyDown(KeyCode.A))
             {
                 m_PlayerEntity.SpinAuto.CastAbility();
+            }else if (Input.GetKeyDown(KeyCode.Z))
+            {
+                m_PlayerEntity.AutoAttack.CastAbility();
             }
         }
+        
         private bool TargetCheck(Ray point)
         {
             if (Physics.Raycast(point, out RaycastHit info, 1000, m_EnemyLayerMask))
@@ -41,9 +46,6 @@ namespace KarpysDev.Script.Player
                 if (targetable == m_CurrentTargetable)
                     return true;
                 
-                m_PlayerEntity.OnInterupt?.Invoke();
-                m_NeedToReachDestination = true;
-                m_PlayerAnimation.PlayOrContinueBotAnimation("Walk");
                 SetTarget(targetable);
                 return true;
             }
@@ -61,7 +63,7 @@ namespace KarpysDev.Script.Player
                 m_PlayerEntity.OnInterupt?.Invoke();
                 m_Destination = newPosition;
                 m_NeedToReachDestination = true;
-                m_PlayerAnimation.PlayOrContinueBotAnimation("Walk");
+                m_EntityAnimator.PlayOrContinueBotAnimation("Walk");
                     
                 m_LookAt.SetPoint(m_Destination);
                 m_LookAt.Active(true);
@@ -72,18 +74,22 @@ namespace KarpysDev.Script.Player
             }
         }
 
-        private void SetTarget(ITargetable targetable)
+        public override void SetTarget(ITargetable targetable)
         {
-            m_CurrentTargetable = targetable;
+            base.SetTarget(targetable);
             m_LookAt.SetTarget(targetable.GetPivot);
             m_LookAt.Active(true);
+            m_PlayerEntity.OnInterupt?.Invoke();
+            m_NeedToReachDestination = true;
+            m_EntityAnimator.PlayOrContinueBotAnimation("Walk");
         }
         
         protected override void OnTargetReached()
         {
             base.OnTargetReached();
-            
-            m_PlayerAnimation.PlayOrContinueBotAnimation("Idle",0.25f);
+
+            m_EntityAnimator.PlayOrContinueBotAnimation("Idle",0.25f);
+            return;
             TryLaunchAutoAttack();
         }
         
@@ -91,10 +97,5 @@ namespace KarpysDev.Script.Player
         {
             m_PlayerEntity.AutoAttack.CastAbility();
         }
-    }
-
-    public interface ITargetProvider
-    {
-        public ITargetable Targetable {get;}
     }
 }

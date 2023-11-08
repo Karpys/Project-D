@@ -7,17 +7,24 @@ namespace KarpysDev.Script.Behaviour
 {
     public class BaseEntity : MonoBehaviour,IDamageReceiver
     {
+        [Header("Entity Info")]
+        [SerializeField] protected float m_AttackRange = 0f;
+        [Header("References")]
         [SerializeField] private EntityAnimator m_Animator = null;
         [SerializeField] private Transform m_Root = null;
+        [SerializeField] private EntityController m_BaseController = null;
 
+        protected IController m_Controller = null;
         protected ISource m_Source = null;
         public EntityAnimator Animator => m_Animator;
         public Transform Root => m_Root;
 
         public Action OnInterupt = null;
+        public IController Controller => m_Controller;
 
         protected virtual void Awake()
         {
+            m_Controller = m_BaseController;
             m_Source = new EntitySource(this, m_Animator, m_Root);
         }
 
@@ -35,5 +42,12 @@ namespace KarpysDev.Script.Behaviour
         {
             return this;
         }
+    }
+
+    public interface IController
+    {
+        void StopMovement();
+        void SetTarget(ITargetable targetable);
+        void SetLookAtTarget(Transform target);
     }
 }

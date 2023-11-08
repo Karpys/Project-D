@@ -150,10 +150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c22aabc82320478b9911d1e1cf20fd9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_AttackRange: 3
   m_Animator: {fileID: 939207989913327858}
   m_Root: {fileID: 939207990670714542}
+  m_BaseController: {fileID: 2185555139029155111}
   m_LookAt: {fileID: 939207989913327859}
-  m_EntityController: {fileID: 2185555139029155111}
 --- !u!114 &2185555139029155111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,16 +168,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EntityRoot: {fileID: 939207989913327857}
-  m_PlayerAnimation: {fileID: 939207989913327858}
+  m_EntityAnimator: {fileID: 939207989913327858}
   m_LookAt: {fileID: 939207989913327859}
   m_Speed: 5
   m_DistanceToStop: 0.5
-  m_AttackRange: 1.5
+  m_TargetRangeStop: 1
+  m_PlayerEntity: {fileID: 7134173555516631760}
+  m_PointCamera: {fileID: 939207989465974261}
   m_EnemyLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  m_PlayerEntity: {fileID: 7134173555516631760}
-  m_PointCamera: {fileID: 939207989465974261}
 --- !u!114 &939207989913327858
 MonoBehaviour:
   m_ObjectHideFlags: 0
