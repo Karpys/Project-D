@@ -13,7 +13,6 @@ namespace KarpysDev.Script.Player
         protected override void EntityActionUpdate()
         {
             PlayerInput();
-
             base.EntityActionUpdate();
         }
 
@@ -21,6 +20,7 @@ namespace KarpysDev.Script.Player
         {
             if (Input.GetMouseButton(1))
             {
+                OnNewCommand?.Invoke();
                 Ray point = m_PointCamera.ScreenPointToRay(Input.mousePosition);
                 if (!TargetCheck(point))
                 {
@@ -30,9 +30,11 @@ namespace KarpysDev.Script.Player
 
             if (Input.GetKeyDown(KeyCode.A))
             {
+                OnNewCommand?.Invoke();
                 m_PlayerEntity.SpinAuto.CastAbility();
             }else if (Input.GetKeyDown(KeyCode.Z))
             {
+                OnNewCommand?.Invoke();
                 m_PlayerEntity.AutoAttack.CastAbility();
             }
         }

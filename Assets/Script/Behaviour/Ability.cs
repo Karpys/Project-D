@@ -5,26 +5,33 @@ namespace KarpysDev.Script.Behaviour
     public abstract class Ability
     {
         protected ISource m_Source = null;
-        protected SpellRule m_SpellRule = null;
+        protected AbilityRule m_AbilityRule = null;
 
-        protected Ability(ISource source,SpellRule spellRule)
+        protected Ability(ISource source,AbilityRule abilityRule)
         {
             m_Source = source;
-            m_SpellRule = spellRule;
+            m_AbilityRule = abilityRule;
+            m_AbilityRule.SetAbility(this);
         }
 
         protected abstract void Trigger();
         protected abstract bool IsSpellCanBeCast();
-        protected abstract bool IsRuleComplete();
-
         public void CastAbility()
         {
             if(!IsSpellCanBeCast())
                 return;
             
-            m_SpellRule.GetInfo();
-            if(m_SpellRule.IsCompelte)
+            m_AbilityRule.GetInfo();
+            if(m_AbilityRule.IsCompelte())
                 Trigger();
+        }
+
+        public void DirectCastAbility()
+        {
+            if(!IsSpellCanBeCast())
+                return;
+            
+            Trigger();
         }
     }
 }

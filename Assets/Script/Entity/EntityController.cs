@@ -18,11 +18,17 @@ namespace KarpysDev.Script.Player
 
         protected Vector3 m_Destination = Vector3.zero;
         protected bool m_NeedToReachDestination = false;
+        protected EntityCommand m_OverrideBehaviorCommand = null;
 
         protected ITargetable m_CurrentTargetable = null;
-
+        protected Action A_OnNewCommand = null;
         public EntityAnimator Animator => m_EntityAnimator;
         public ITargetable Targetable => m_CurrentTargetable;
+        public Action OnNewCommand
+        {
+            get => A_OnNewCommand;
+            set => A_OnNewCommand = value;
+        }
 
 
         protected void Update()
@@ -34,6 +40,13 @@ namespace KarpysDev.Script.Player
 
         protected virtual void EntityActionUpdate()
         {
+            if (m_OverrideBehaviorCommand != null)
+            {
+                Debug.Log("execute override command");
+                m_OverrideBehaviorCommand.Execute();
+                return;
+            }
+                
             if (m_NeedToReachDestination)
             {
                 if(m_CurrentTargetable == null)
@@ -66,7 +79,7 @@ namespace KarpysDev.Script.Player
             }
         }
         
-        private void MoveTowardsTarget()
+        public void MoveTowardsTarget()
         {
             Vector3 newDestination = Vector3.MoveTowards(transform.position,m_CurrentTargetable.GetPivot.position,m_Speed * Time.deltaTime);
             
@@ -81,6 +94,7 @@ namespace KarpysDev.Script.Player
         }
 
         protected virtual void OnTargetReached(){}
+
         public void StopMovement()
         {
             m_NeedToReachDestination = false;
@@ -96,6 +110,59 @@ namespace KarpysDev.Script.Player
         public void SetLookAtTarget(Transform target)
         {
             m_LookAt.SetTarget(target);
+        }
+
+        public void AddCommand(EntityCommand command)
+        {
+            m_OverrideBehaviorCommand = command;
+        }
+
+        public void ClearCommand()
+        {
+            m_OverrideBehaviorCommand = null;
+        }
+    }
+
+    public abstract class EntityCommand
+    {
+        public abstract void Execute();
+    }
+
+    public class MoveTowardTargetableAndTryCastSpell : EntityCommand
+    {
+        private IController m_Controller = null;
+        private Transform m_Caster = null;
+        private ITargetable m_Target = null;
+        private float m_AbilityRange = 0;
+        private Ability m_Ability = null;
+        
+        public MoveTowardTargetableAndTryCastSpell(IController controller,Transform caster, ITargetable targetable, float range,Ability ability)
+        {
+            m_Ability = ability;
+            m_Caster = caster;
+            m_Controller = controller;
+            m_Target = targetable;
+            m_AbilityRange = range;
+
+            controller.OnNewCommand += CancelCommand;
+        }
+
+        public override void Execute()
+        {
+            if (Vector3.Distance(m_Caster.position, m_Target.GetPivot.position) <= m_AbilityRange)
+            {
+                m_Ability.DirectCastAbility();
+            }
+            else
+            {
+                m_Controller.MoveTowardsTarget();
+            }
+        }
+
+        private void CancelCommand()
+        {
+            m_Controller.OnNewCommand -= CancelCommand;
+            m_Controller.ClearCommand();
         }
     }
 }

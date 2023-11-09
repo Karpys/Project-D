@@ -15,7 +15,7 @@ namespace KarpysDev.Script.Behaviour
         
         private bool m_IsCancelled = false;
 
-        public AutoAttack(ISource source,PlayerPointTargetableSpellRule spellRule,float attackSpeed,float attackLockNeeded):base(source,spellRule)
+        public AutoAttack(ISource source,PlayerPointTargetableAbilityRule abilityRule,float attackSpeed,float attackLockNeeded):base(source,abilityRule)
         {
             if(source is EntitySource entitySource)
                 m_Entity = entitySource.Entity;
@@ -66,7 +66,7 @@ namespace KarpysDev.Script.Behaviour
                 return;
             }
 
-            if (m_PlayerPointTargetableSpellRule.Targetable is IDamageTargetable damageTargetable)
+            if (PlayerPointTargetableAbilityRule.Targetable is IDamageTargetable damageTargetable)
             {
                 damageTargetable.DamageReceiver.ReceiveDamage(new DamageSource(50f,DamageType.Physical),m_Source);
                 Debug.Log("Apply Damage");

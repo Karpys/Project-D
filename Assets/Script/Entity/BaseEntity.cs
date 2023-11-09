@@ -46,8 +46,12 @@ namespace KarpysDev.Script.Behaviour
 
     public interface IController
     {
+        Action OnNewCommand { get; set; }
         void StopMovement();
         void SetTarget(ITargetable targetable);
         void SetLookAtTarget(Transform target);
+        void AddCommand(EntityCommand command);
+        void ClearCommand();
+        void MoveTowardsTarget();
     }
 }

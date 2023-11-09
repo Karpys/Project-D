@@ -1,11 +1,12 @@
 ﻿namespace KarpysDev.Script.Behaviour
 {
-    public class NoRule : SpellRule
+    public class NoRule : AbilityRule
     {
-        public NoRule()
+        public override bool IsCompelte()
         {
-            m_IsComplete = true;
+            return true;
         }
+
         public override void GetInfo()
         {
             return;

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace KarpysDev.Script.Behaviour
 {
     //Made a super class PointTargetatbleSpellRule//
-    public class PlayerPointTargetableSpellRule:SpellRule
+    public class PlayerPointTargetableAbilityRule:AbilityRule
     {
         private ITargetable m_Targetable = null;
         private float m_Range = 0;
@@ -13,13 +13,15 @@ namespace KarpysDev.Script.Behaviour
         private IController m_Controller = null;
         public ITargetable Targetable => m_Targetable;
 
-        public PlayerPointTargetableSpellRule(Transform caster, float range)
+        private bool m_InRangeAndTarget = false;
+
+        public PlayerPointTargetableAbilityRule(Transform caster, float range)
         {
             m_Range = range;
             m_Caster = caster;
         }
 
-        public PlayerPointTargetableSpellRule(Transform caster, float range,IController controller)
+        public PlayerPointTargetableAbilityRule(Transform caster, float range,IController controller)
         {
             m_Range = range;
             m_Caster = caster;
@@ -40,16 +42,29 @@ namespace KarpysDev.Script.Behaviour
                 if (Vector3.Distance(m_Caster.position, targetable.GetPivot.position) <= m_Range)
                 {
                     m_Targetable = targetable;
-                    m_IsComplete = true;
+                    m_InRangeAndTarget = true;
                     return;
                 }else if (m_Controller != null)
                 {
+                    m_Targetable = targetable;
                     m_Controller.SetTarget(targetable);
+                    OnRangeFail();
+                    return;
                 }
             }
             
             m_Targetable = null;
-            m_IsComplete = false;
+            m_InRangeAndTarget = false;
+        }
+
+        public override bool IsCompelte()
+        {
+            return m_InRangeAndTarget;
+        }
+
+        private void OnRangeFail()
+        {
+            m_Controller.AddCommand(new MoveTowardTargetableAndTryCastSpell(m_Controller,m_Caster,m_Targetable,m_Range,m_Ability));
         }
     }
 }
