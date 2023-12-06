@@ -1,5 +1,5 @@
-﻿using KarpysDev.Script.Damage;
-using TweenCustom;
+﻿using KarpysDev.KarpysUtils.TweenCustom;
+using KarpysDev.Script.Damage;
 using UnityEngine;
 
 namespace KarpysDev.Script.Behaviour

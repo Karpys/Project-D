@@ -1,7 +1,7 @@
-﻿using System.Collections;
+﻿using KarpysDev.KarpysUtils;
 using KarpysDev.Script.Damage;
 using KarpysDev.Script.Player;
-using KarpysDev.Script.Widget;
+using KarpysDev.Script.Utils.ProjectUtils;
 using UnityEngine;
 
 namespace KarpysDev.Script.Behaviour
