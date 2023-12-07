@@ -53,5 +53,6 @@ namespace KarpysDev.Script.Behaviour
         void AddCommand(EntityCommand command);
         void ClearCommand();
         void MoveTowardsTarget();
+        void ChangeMovementLockCount(int count);
     }
 }

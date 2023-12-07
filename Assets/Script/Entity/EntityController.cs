@@ -16,6 +16,7 @@ namespace KarpysDev.Script.Player
         [SerializeField] protected float m_DistanceToStop = 0;
         [SerializeField] protected float m_TargetRangeStop = 0;
 
+        protected int m_MovementLockCount = 0;
         protected Vector3 m_Destination = Vector3.zero;
         protected bool m_NeedToReachDestination = false;
         protected EntityCommand m_OverrideBehaviorCommand = null;
@@ -67,6 +68,9 @@ namespace KarpysDev.Script.Player
 
         private void MoveTowardsDestination()
         {
+            if(m_MovementLockCount > 0)
+                return;
+            
             Vector3 newDestination = Vector3.MoveTowards(transform.position,m_Destination,m_Speed * Time.deltaTime);
 
             if (Vector3.Distance(transform.position, m_Destination) <= m_DistanceToStop)
@@ -82,6 +86,9 @@ namespace KarpysDev.Script.Player
         
         public void MoveTowardsTarget()
         {
+            if(m_MovementLockCount > 0)
+                return;
+            
             Vector3 newDestination = Vector3.MoveTowards(transform.position,m_CurrentTargetable.GetPivot.position,m_Speed * Time.deltaTime);
             
             if (Vector3.Distance(transform.position, m_CurrentTargetable.GetPivot.position) <= m_TargetRangeStop)
@@ -92,6 +99,11 @@ namespace KarpysDev.Script.Player
             {
                 transform.position = newDestination;
             }
+        }
+
+        public void ChangeMovementLockCount(int count)
+        {
+            m_MovementLockCount += count;
         }
 
         protected virtual void OnTargetReached(){}

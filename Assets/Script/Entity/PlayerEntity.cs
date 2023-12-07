@@ -11,7 +11,7 @@ namespace KarpysDev.Script.Behaviour
         
         private AutoAttack m_AutoAttack = null;
         private Ability m_SpinAuto = null;
-        private Ability m_Projectile = null;
+        private ProjectileAbility m_Projectile = null;
 
         public AutoAttack AutoAttack => m_AutoAttack;
         public Ability SpinAuto => m_SpinAuto;
@@ -27,6 +27,7 @@ namespace KarpysDev.Script.Behaviour
         public void Update()
         {
             m_AutoAttack.Update();
+            m_Projectile.Update();
         }
     }
 }

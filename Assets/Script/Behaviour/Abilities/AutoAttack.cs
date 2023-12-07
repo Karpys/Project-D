@@ -1,4 +1,5 @@
 ﻿using KarpysDev.KarpysUtils;
+using KarpysDev.KarpysUtils.MethodDelay;
 using KarpysDev.Script.Damage;
 using KarpysDev.Script.Player;
 using KarpysDev.Script.Utils.ProjectUtils;
@@ -10,9 +11,9 @@ namespace KarpysDev.Script.Behaviour
     {
         private BaseEntity m_Entity = null;
         private Clocker m_AutoAttackClock = null;
-        private Clock m_LaunchAction = null;
         private float m_AttackLockNeeded = 0f;
         
+        private IMethodDelayer m_LaunchAction = new SingleMethodDelayer();
         private bool m_IsCancelled = false;
 
         public AutoAttack(ISource source,PlayerPointTargetableAbilityRule abilityRule,float attackSpeed,float attackLockNeeded):base(source,abilityRule)
@@ -29,7 +30,7 @@ namespace KarpysDev.Script.Behaviour
             
             m_IsCancelled = false;
             m_AutoAttackClock.Launch();
-            m_LaunchAction = new Clock(m_AttackLockNeeded, ApplyDamage);
+            m_LaunchAction.AddDelayMethod(ApplyDamage,m_AttackLockNeeded);
             
             if (m_Entity)
             {
@@ -53,7 +54,7 @@ namespace KarpysDev.Script.Behaviour
         public void Update()
         {
             m_AutoAttackClock.UpdateClock();
-            m_LaunchAction?.UpdateClock();
+            m_LaunchAction.Update();
         }
 
         private void ApplyDamage()
