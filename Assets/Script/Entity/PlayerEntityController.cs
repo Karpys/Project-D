@@ -36,6 +36,10 @@ namespace KarpysDev.Script.Player
             {
                 OnNewCommand?.Invoke();
                 m_PlayerEntity.AutoAttack.CastAbility();
+            }else if (Input.GetKeyDown(KeyCode.E))
+            {
+                OnNewCommand?.Invoke();
+                m_PlayerEntity.Projectile.CastAbility();
             }
         }
         

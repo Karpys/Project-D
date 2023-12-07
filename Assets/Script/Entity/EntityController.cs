@@ -24,6 +24,7 @@ namespace KarpysDev.Script.Player
         protected Action A_OnNewCommand = null;
         public EntityAnimator Animator => m_EntityAnimator;
         public ITargetable Targetable => m_CurrentTargetable;
+        public LookAt LookAt => m_LookAt;
         public Action OnNewCommand
         {
             get => A_OnNewCommand;
@@ -152,6 +153,7 @@ namespace KarpysDev.Script.Player
             if (Vector3.Distance(m_Caster.position, m_Target.GetPivot.position) <= m_AbilityRange)
             {
                 m_Ability.DirectCastAbility();
+                CancelCommand();
             }
             else
             {

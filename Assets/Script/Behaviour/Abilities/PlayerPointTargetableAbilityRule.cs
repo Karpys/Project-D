@@ -31,6 +31,9 @@ namespace KarpysDev.Script.Behaviour
         {
             //Add Camera in constructor or acces through a CameraManager
             Ray point = Camera.main.ScreenPointToRay(Input.mousePosition);
+            
+            m_Targetable = null;
+            m_InRangeAndTarget = false;
 
             if (Physics.Raycast(point, out RaycastHit info,100, GameManager.Instance.EnemyLayerMask))
             {
@@ -43,18 +46,13 @@ namespace KarpysDev.Script.Behaviour
                 {
                     m_Targetable = targetable;
                     m_InRangeAndTarget = true;
-                    return;
                 }else if (m_Controller != null)
                 {
                     m_Targetable = targetable;
                     m_Controller.SetTarget(targetable);
                     OnRangeFail();
-                    return;
                 }
             }
-            
-            m_Targetable = null;
-            m_InRangeAndTarget = false;
         }
 
         public override bool IsCompelte()

@@ -66,7 +66,7 @@ namespace KarpysDev.Script.Behaviour
                 return;
             }
 
-            if (PlayerPointTargetableAbilityRule.Targetable is IDamageTargetable damageTargetable)
+            if (m_PlayerPointTargetableAbilityRule.Targetable is IDamageTargetable damageTargetable)
             {
                 damageTargetable.DamageReceiver.ReceiveDamage(new DamageSource(50f,DamageType.Physical),m_Source);
                 Debug.Log("Apply Damage");

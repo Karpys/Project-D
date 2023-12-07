@@ -35,8 +35,6 @@ namespace KarpysDev.Script.Player
         public void PlayTopAnimation(string animationName, float duration = 0.05f, bool replay = true)
         {
             Debug.Log("Animation to play: " + animationName);
-            
-            
             m_TopAnimationToPlay = animationName;
             m_TopTransitionDuration = duration;
         }

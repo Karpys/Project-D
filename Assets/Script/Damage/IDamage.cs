@@ -2,6 +2,7 @@
 
 namespace KarpysDev.Script.Damage
 {
+    //Obsolete ?
     public interface IDamage
     {
         public void ApplyDamage(IDamageReceiver damageReceiver);

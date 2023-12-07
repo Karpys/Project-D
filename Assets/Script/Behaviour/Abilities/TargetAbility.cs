@@ -5,17 +5,17 @@ namespace KarpysDev.Script.Behaviour
 {
     public abstract class TargetAbility : Ability
     {
-        protected PlayerPointTargetableAbilityRule PlayerPointTargetableAbilityRule = null;
+        protected PlayerPointTargetableAbilityRule m_PlayerPointTargetableAbilityRule = null;
         protected ITargetable m_Targetable = null;
 
         protected TargetAbility(ISource source, PlayerPointTargetableAbilityRule abilityRule) : base(source, abilityRule)
         {
-            PlayerPointTargetableAbilityRule = abilityRule;
+            m_PlayerPointTargetableAbilityRule = abilityRule;
         }
 
         protected override void Trigger()
         {
-            m_Targetable = PlayerPointTargetableAbilityRule.Targetable;
+            m_Targetable = m_PlayerPointTargetableAbilityRule.Targetable;
         }
         
         protected override bool IsSpellCanBeCast()

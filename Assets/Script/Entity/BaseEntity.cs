@@ -25,7 +25,7 @@ namespace KarpysDev.Script.Behaviour
         protected virtual void Awake()
         {
             m_Controller = m_BaseController;
-            m_Source = new EntitySource(this, m_Animator, m_Root);
+            m_Source = new EntitySource(this, m_Animator, m_Root,m_BaseController);
         }
 
         public void ReceiveDamage(DamageSource damageSource,ISource source)

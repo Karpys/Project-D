@@ -8,15 +8,20 @@ namespace KarpysDev.Script.Behaviour
     {
         private BaseEntity m_Controller = null;
         private LookAt m_LookAt = null;
-        public SpinAuto(ISource source, AbilityRule abilityRule, LookAt lookAt) : base(source,abilityRule)
+        public SpinAuto(ISource source, AbilityRule abilityRule) : base(source,abilityRule)
         {
             if (source is EntitySource entitySource)
+            {
                 m_Controller = entitySource.Entity;
-            m_LookAt = lookAt;
+                m_LookAt = entitySource.EntityController.LookAt;
+            }
         }
 
         protected override void Trigger()
         {
+            if(!m_LookAt || !m_Controller)
+                return;
+            
             m_LookAt.ChangeLockCount(1);
             m_Controller.Animator.PlayTopAnimation("SpinSword",0.25f);
             m_Controller.Root.transform.DoRotate(new Vector3(0, 360,0),.3f).SetMode(TweenMode.ADDITIVE).OnComplete(() =>
