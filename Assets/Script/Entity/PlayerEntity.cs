@@ -1,4 +1,5 @@
-﻿using KarpysDev.Script.Player;
+﻿using KarpysDev.Script.Behaviour.Projectile;
+using KarpysDev.Script.Player;
 using UnityEngine;
 
 namespace KarpysDev.Script.Behaviour
@@ -6,8 +7,7 @@ namespace KarpysDev.Script.Behaviour
     public class PlayerEntity : BaseEntity
     {
         [Header("Player Entity Specifics")]
-        [SerializeField] private GameObject m_ProjectilePrefab = null;
-        [SerializeField] private float m_ProjectileSpeed = 0;
+        [SerializeField] private BaseProjectile m_ProjectilePrefab = null;
         
         private AutoAttack m_AutoAttack = null;
         private Ability m_SpinAuto = null;
@@ -21,7 +21,7 @@ namespace KarpysDev.Script.Behaviour
             base.Awake();
             m_AutoAttack = new AutoAttack(m_Source,new PlayerPointTargetableAbilityRule(transform,m_AttackRange,m_Controller),0.5f,0.2f);
             m_SpinAuto = new SpinAuto(m_Source,new NoRule());
-            m_Projectile = new ProjectileAbility(m_Source, new GroundCastAbilityRule(), m_ProjectilePrefab, m_ProjectileSpeed,new Vector3(0,1,0));
+            m_Projectile = new ProjectileAbility(m_Source, new GroundCastAbilityRule(), m_ProjectilePrefab, 0.15f, 0.05f, 1f);
         }
 
         public void Update()

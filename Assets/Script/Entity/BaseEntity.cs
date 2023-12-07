@@ -12,6 +12,7 @@ namespace KarpysDev.Script.Behaviour
         [Header("References")]
         [SerializeField] private EntityAnimator m_Animator = null;
         [SerializeField] private Transform m_Root = null;
+        [SerializeField] private Transform m_SpawnRoot = null;
         [SerializeField] private EntityController m_BaseController = null;
 
         protected IController m_Controller = null;
@@ -19,13 +20,12 @@ namespace KarpysDev.Script.Behaviour
         public EntityAnimator Animator => m_Animator;
         public Transform Root => m_Root;
 
-        public Action OnInterupt = null;
         public IController Controller => m_Controller;
 
         protected virtual void Awake()
         {
             m_Controller = m_BaseController;
-            m_Source = new EntitySource(this, m_Animator, m_Root,m_BaseController);
+            m_Source = new EntitySource(this, m_Animator, m_Root,m_SpawnRoot,m_BaseController);
         }
 
         public void ReceiveDamage(DamageSource damageSource,ISource source)
@@ -46,6 +46,7 @@ namespace KarpysDev.Script.Behaviour
 
     public interface IController
     {
+        LookAt LookAt {get;}
         Action OnNewCommand { get; set; }
         void StopMovement();
         void SetTarget(ITargetable targetable);
@@ -53,6 +54,9 @@ namespace KarpysDev.Script.Behaviour
         void AddCommand(EntityCommand command);
         void ClearCommand();
         void MoveTowardsTarget();
+        int MovementLockCount {get;}
+        int CastLockCount {get;}
         void ChangeMovementLockCount(int count);
+        void ChangeCastLockCount(int count);
     }
 }

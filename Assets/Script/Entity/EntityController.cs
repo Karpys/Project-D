@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace KarpysDev.Script.Player
 {
-    public class EntityController : MonoBehaviour,IController
+    public class EntityController : MonoBehaviour,IController,IAnimator
     {
         [Header("References")] 
         [SerializeField] protected Transform m_EntityRoot = null;
@@ -17,6 +17,7 @@ namespace KarpysDev.Script.Player
         [SerializeField] protected float m_TargetRangeStop = 0;
 
         protected int m_MovementLockCount = 0;
+        protected int m_CastLockCount = 0;
         protected Vector3 m_Destination = Vector3.zero;
         protected bool m_NeedToReachDestination = false;
         protected EntityCommand m_OverrideBehaviorCommand = null;
@@ -31,6 +32,9 @@ namespace KarpysDev.Script.Player
             get => A_OnNewCommand;
             set => A_OnNewCommand = value;
         }
+
+        public int MovementLockCount => m_MovementLockCount;
+        public int CastLockCount => m_CastLockCount;
 
 
         protected void Update()
@@ -106,6 +110,11 @@ namespace KarpysDev.Script.Player
             m_MovementLockCount += count;
         }
 
+        public void ChangeCastLockCount(int count)
+        {
+            m_CastLockCount += count;
+        }
+
         protected virtual void OnTargetReached(){}
 
         public void StopMovement()
@@ -133,50 +142,6 @@ namespace KarpysDev.Script.Player
         public void ClearCommand()
         {
             m_OverrideBehaviorCommand = null;
-        }
-    }
-
-    public abstract class EntityCommand
-    {
-        public abstract void Execute();
-    }
-
-    public class MoveTowardTargetableAndTryCastSpell : EntityCommand
-    {
-        private IController m_Controller = null;
-        private Transform m_Caster = null;
-        private ITargetable m_Target = null;
-        private float m_AbilityRange = 0;
-        private Ability m_Ability = null;
-        
-        public MoveTowardTargetableAndTryCastSpell(IController controller,Transform caster, ITargetable targetable, float range,Ability ability)
-        {
-            m_Ability = ability;
-            m_Caster = caster;
-            m_Controller = controller;
-            m_Target = targetable;
-            m_AbilityRange = range;
-
-            controller.OnNewCommand += CancelCommand;
-        }
-
-        public override void Execute()
-        {
-            if (Vector3.Distance(m_Caster.position, m_Target.GetPivot.position) <= m_AbilityRange)
-            {
-                m_Ability.DirectCastAbility();
-                CancelCommand();
-            }
-            else
-            {
-                m_Controller.MoveTowardsTarget();
-            }
-        }
-
-        private void CancelCommand()
-        {
-            m_Controller.OnNewCommand -= CancelCommand;
-            m_Controller.ClearCommand();
         }
     }
 }

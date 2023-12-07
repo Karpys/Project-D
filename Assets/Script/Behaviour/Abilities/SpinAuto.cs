@@ -6,34 +6,27 @@ namespace KarpysDev.Script.Behaviour
 {
     public class SpinAuto : Ability,IDamage
     {
-        private BaseEntity m_Controller = null;
-        private LookAt m_LookAt = null;
+        private IAnimator m_Animator = null;
         public SpinAuto(ISource source, AbilityRule abilityRule) : base(source,abilityRule)
         {
-            if (source is EntitySource entitySource)
-            {
-                m_Controller = entitySource.Entity;
-                m_LookAt = entitySource.EntityController.LookAt;
-            }
+            if (source.Controller is IAnimator animator)
+                m_Animator = animator;
         }
 
         protected override void Trigger()
         {
-            if(!m_LookAt || !m_Controller)
-                return;
-            
-            m_LookAt.ChangeLockCount(1);
-            m_Controller.Animator.PlayTopAnimation("SpinSword",0.25f);
-            m_Controller.Root.transform.DoRotate(new Vector3(0, 360,0),.3f).SetMode(TweenMode.ADDITIVE).OnComplete(() =>
+            m_Animator?.Animator.PlayTopAnimation("SpinSword",0.25f);
+            m_Source.Controller.LookAt.ChangeLockCount(1);
+            m_Source.Root.transform.DoRotate(new Vector3(0, 360,0),.3f).SetMode(TweenMode.ADDITIVE).OnComplete(() =>
             {
-                m_LookAt.ChangeLockCount(-1);
-                m_Controller.Animator.PlayTopAnimation("HoldSword",0.15f);
+                m_Source.Controller.LookAt.ChangeLockCount(-1);
+                m_Animator?.Animator.PlayTopAnimation("HoldSword",0.15f);
             });
         }
 
         protected override bool IsSpellCanBeCast()
         {
-            return true;
+            return m_Source.Controller.CastLockCount <= 0;
         }
 
         public void ApplyDamage(IDamageReceiver damageReceiver)

@@ -980,7 +980,7 @@ PrefabInstance:
     - target: {fileID: 7134173555516631760, guid: 88e3f9d7633d95a40853d1c76bf2ff6d, type: 3}
       propertyPath: m_ProjectilePrefab
       value: 
-      objectReference: {fileID: 2809857222407583343, guid: 9087bda9ac36ad540ba5ef389c204a9a, type: 3}
+      objectReference: {fileID: -473323913338431787, guid: 9087bda9ac36ad540ba5ef389c204a9a, type: 3}
     - target: {fileID: 7806915877114097643, guid: 88e3f9d7633d95a40853d1c76bf2ff6d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 9.461247

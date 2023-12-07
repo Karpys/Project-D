@@ -153,8 +153,9 @@ MonoBehaviour:
   m_AttackRange: 3
   m_Animator: {fileID: 939207989913327858}
   m_Root: {fileID: 939207990670714542}
+  m_SpawnRoot: {fileID: 5799682771789934117}
   m_BaseController: {fileID: 2185555139029155111}
-  m_LookAt: {fileID: 939207989913327859}
+  m_ProjectilePrefab: {fileID: 0}
 --- !u!114 &2185555139029155111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,9 +237,40 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 757174068372868518}
+  - {fileID: 5799682771789934117}
   m_Father: {fileID: 939207989913327857}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &6448259466604584187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5799682771789934117}
+  m_Layer: 0
+  m_Name: SpawnRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5799682771789934117
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6448259466604584187}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.85, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 939207990670714542}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &939207989833624141
 PrefabInstance:
   m_ObjectHideFlags: 0

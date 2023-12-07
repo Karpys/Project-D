@@ -37,7 +37,7 @@ namespace KarpysDev.Script.Behaviour
                 m_Entity.Animator.PlayTopAnimation("Attack",0.25f);
                 m_Entity.Controller.SetLookAtTarget(m_Targetable.GetPivot);
                 m_Entity.Controller.StopMovement();
-                m_Entity.OnInterupt += Cancelled;
+                m_Entity.Controller.OnNewCommand += Cancelled;
             }
         }
 
@@ -63,7 +63,7 @@ namespace KarpysDev.Script.Behaviour
             {
                 //Todo:Play This anim only if player is in Attack State//
                 m_Entity.Animator.PlayTopAnimation("HoldSword",0.1f);
-                m_Entity.OnInterupt -= Cancelled;
+                m_Entity.Controller.OnNewCommand -= Cancelled;
                 return;
             }
 

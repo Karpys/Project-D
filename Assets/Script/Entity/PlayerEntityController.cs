@@ -1,4 +1,5 @@
-﻿using KarpysDev.Script.Behaviour;
+﻿using System;
+using KarpysDev.Script.Behaviour;
 using UnityEngine;
 
 namespace KarpysDev.Script.Player
@@ -10,17 +11,24 @@ namespace KarpysDev.Script.Player
         [SerializeField] protected LayerMask m_EnemyLayerMask;
 
 
+        private string m_LastCommandId = String.Empty;
         protected override void EntityActionUpdate()
         {
             PlayerInput();
             base.EntityActionUpdate();
         }
 
+        private void TriggerCommand(string newCommandId)
+        {
+            if(newCommandId != m_LastCommandId)
+                OnNewCommand?.Invoke();
+            m_LastCommandId = newCommandId;
+        }
         private void PlayerInput()
         {
             if (Input.GetMouseButton(1))
             {
-                OnNewCommand?.Invoke();
+                TriggerCommand("Movement");
                 Ray point = m_PointCamera.ScreenPointToRay(Input.mousePosition);
                 if (!TargetCheck(point))
                 {
@@ -30,15 +38,15 @@ namespace KarpysDev.Script.Player
 
             if (Input.GetKeyDown(KeyCode.A))
             {
-                OnNewCommand?.Invoke();
+                TriggerCommand("Ability1");
                 m_PlayerEntity.SpinAuto.CastAbility();
             }else if (Input.GetKeyDown(KeyCode.Z))
             {
-                OnNewCommand?.Invoke();
+                TriggerCommand("Ability2");
                 m_PlayerEntity.AutoAttack.CastAbility();
             }else if (Input.GetKeyDown(KeyCode.E))
             {
-                OnNewCommand?.Invoke();
+                TriggerCommand("Ability3");
                 m_PlayerEntity.Projectile.CastAbility();
             }
         }
@@ -66,7 +74,6 @@ namespace KarpysDev.Script.Player
                 Transform playerRootTransform = m_EntityRoot.transform;
                 Vector3 playerPosition = playerRootTransform.position;
                 Vector3 newPosition = new Vector3(info.point.x, playerPosition.y, info.point.z);
-                m_PlayerEntity.OnInterupt?.Invoke();
                 m_Destination = newPosition;
                 m_NeedToReachDestination = true;
                 m_EntityAnimator.PlayOrContinueBotAnimation("Walk");
@@ -85,7 +92,6 @@ namespace KarpysDev.Script.Player
             base.SetTarget(targetable);
             m_LookAt.SetTarget(targetable.GetPivot);
             m_LookAt.Active(true);
-            m_PlayerEntity.OnInterupt?.Invoke();
             m_NeedToReachDestination = true;
             m_EntityAnimator.PlayOrContinueBotAnimation("Walk");
         }
