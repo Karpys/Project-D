@@ -13,9 +13,20 @@ MonoBehaviour:
   m_Name: Copain
   m_EditorClassIdentifier: 
   m_AbilityField:
-    m_ClassName: ProjectileAbility
-    m_FieldValues: []
+    m_ClassName: CustomClass
+    m_FieldValues:
+    - Type: 0
+      Value: 0
+      AssemblyQualifiedName: 
+    - Type: 3
+      Value: KarpysDev.Script.Damage.DamageType Physical
+      AssemblyQualifiedName: KarpysDev.Script.Damage.DamageType, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - Type: 3
+      Value: UnityEngine.KeyCode Backspace
+      AssemblyQualifiedName: UnityEngine.KeyCode, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
     m_ConstructorId: 0
-    m_IgnoreParams: 3
+    m_IgnoreParams: 0
   m_MyNewField: 0
   m_MyNewField2: 0
