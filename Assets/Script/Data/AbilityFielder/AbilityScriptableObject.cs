@@ -35,9 +35,10 @@ namespace Script.Data.AbilityFielder
 
     public class CustomClass
     {
-        public KeyCode Key;
-        public CustomClass(int count,DamageType myEnum,KeyCode keyCode)
+        public GameObject Prefab;
+        public CustomClass(GameObject gameObject)
         {
+            Prefab = gameObject;
         }
     }
 }

@@ -10,22 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5961485035d4062aeb5efb3c4e8c386, type: 3}
-  m_Name: Copain
+  m_Name: Ability
   m_EditorClassIdentifier: 
   m_AbilityField:
     m_ClassName: CustomClass
-    m_FieldValues:
-    - Type: 0
-      Value: 0
-      AssemblyQualifiedName: 
-    - Type: 3
-      Value: KarpysDev.Script.Damage.DamageType Physical
-      AssemblyQualifiedName: KarpysDev.Script.Damage.DamageType, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    - Type: 3
-      Value: UnityEngine.KeyCode Backspace
-      AssemblyQualifiedName: UnityEngine.KeyCode, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+    m_FieldValues: []
     m_ConstructorId: 0
     m_IgnoreParams: 0
   m_MyNewField: 0
