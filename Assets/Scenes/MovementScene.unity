@@ -183,9 +183,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857f45b5d7b14e47884ec8704a9b0975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ScriptableObject: {fileID: 11400000, guid: 1d545e19684e345b598fb1d71982837b, type: 2}
-  m_NormalReference: {fileID: 2814010941178254448, guid: af0e3e0d02b654a3d96b269215e611e0, type: 3}
-  m_Count: 1000
 --- !u!1 &488234889
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,6 +964,10 @@ PrefabInstance:
       propertyPath: m_ProjectileSpeed
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 7134173555516631760, guid: 88e3f9d7633d95a40853d1c76bf2ff6d, type: 3}
+      propertyPath: m_ProjectilAbility
+      value: 
+      objectReference: {fileID: 11400000, guid: 2f6889b432f8e498b8ac162aee0d0d92, type: 2}
     - target: {fileID: 7134173555516631760, guid: 88e3f9d7633d95a40853d1c76bf2ff6d, type: 3}
       propertyPath: m_ProjectilePrefab
       value: 

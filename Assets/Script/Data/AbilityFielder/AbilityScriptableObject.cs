@@ -5,6 +5,7 @@ namespace Script.Data.AbilityFielder
 {
     using System;
     using KarpysDev.KarpysUtils;
+    using KarpysDev.Script.Behaviour;
     using KarpysDev.Script.Damage;
     using Object = UnityEngine.Object;
 
@@ -12,24 +13,35 @@ namespace Script.Data.AbilityFielder
     public class AbilityScriptableObject : ScriptableObject,IFielder
     {
         [SerializeField] protected Fielder m_AbilityField = null;
-        [SerializeField] protected int m_MyNewField = 0;
-        [SerializeField] protected int m_MyNewField2= 0;
         public Fielder Fielder => m_AbilityField;
         public Object TargetObject => this;
 
-        public object CreateInstance()
+        public Ability CreateBaseAbility(ISource source,AbilityRule rule)
         {
-            object[] fieldValues = m_AbilityField.GetFields();
-
             Type triggerClass = StringUtils.GetTypeViaClassName(m_AbilityField.ClassName);
 
-            if (triggerClass == null)
+            if (triggerClass == null || triggerClass.BaseType != typeof(Ability))
             {
-                Debug.LogError("The class : " + m_AbilityField.ClassName + " is not recognized");
+                Debug.LogError("The ability class : " + m_AbilityField.ClassName + " is not recognized");
                 return null;
             }
-        
-            return Activator.CreateInstance(triggerClass,fieldValues);
+            
+            object[] fieldValues = m_AbilityField.GetFields();
+            object[] abilityConstructorFields = new object[fieldValues.Length + 2];
+            abilityConstructorFields[0] = source;
+            abilityConstructorFields[1] = rule;
+
+            for (int i = 0; i < fieldValues.Length; i++)
+            {
+                abilityConstructorFields[i+2] = fieldValues[i];
+            }
+
+            foreach (object field in abilityConstructorFields)
+            {
+                field.GetType().Log("Type");
+            }
+
+            return (Ability)Activator.CreateInstance(triggerClass,abilityConstructorFields);
         }
     }
 

@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: Ability
   m_EditorClassIdentifier: 
   m_AbilityField:
-    m_ClassName: CustomClass
+    m_ClassName: ProjectileAbility
     m_FieldValues: []
     m_ConstructorId: 0
-    m_IgnoreParams: 0
-  m_MyNewField: 0
-  m_MyNewField2: 0
+    m_IgnoreParams: 2
