@@ -967,7 +967,7 @@ PrefabInstance:
     - target: {fileID: 7134173555516631760, guid: 88e3f9d7633d95a40853d1c76bf2ff6d, type: 3}
       propertyPath: m_ProjectilAbility
       value: 
-      objectReference: {fileID: 11400000, guid: e86311c03f54a45dc9ed3cf16f632829, type: 2}
+      objectReference: {fileID: 11400000, guid: 852591bf024a40948bb30f05842d38f5, type: 2}
     - target: {fileID: 7134173555516631760, guid: 88e3f9d7633d95a40853d1c76bf2ff6d, type: 3}
       propertyPath: m_ProjectilePrefab
       value: 
