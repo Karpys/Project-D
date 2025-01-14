@@ -10,14 +10,22 @@ namespace Script.Data.AbilityFielder
     using Object = UnityEngine.Object;
 
     [CreateAssetMenu(fileName = "Ability", menuName = "Data/Ability", order = 0)]
-    public class AbilityScriptableObject : ScriptableObject,IFielder
+    public class  AbilityScriptableObject : ScriptableObject,IFielder
     {
         [SerializeField] protected Fielder m_AbilityField = null;
         public Fielder Fielder => m_AbilityField;
         public Object TargetObject => this;
 
+        private object[] m_FieldValues = null;
+        
+        public void GenerateFields()
+        {
+            m_FieldValues = m_AbilityField.GetFields();
+        }
+
         public Ability CreateBaseAbility(ISource source,AbilityRule rule)
         {
+            GenerateFields();
             Type triggerClass = StringUtils.GetTypeViaClassName(m_AbilityField.ClassName);
 
             if (triggerClass == null || triggerClass.BaseType != typeof(Ability))
@@ -25,15 +33,14 @@ namespace Script.Data.AbilityFielder
                 Debug.LogError("The ability class : " + m_AbilityField.ClassName + " is not recognized");
                 return null;
             }
-            
-            object[] fieldValues = m_AbilityField.GetFields();
-            object[] abilityConstructorFields = new object[fieldValues.Length + 2];
+
+            object[] abilityConstructorFields = new object[m_FieldValues.Length + 2];
             abilityConstructorFields[0] = source;
             abilityConstructorFields[1] = rule;
 
-            for (int i = 0; i < fieldValues.Length; i++)
+            for (int i = 0; i < m_FieldValues.Length; i++)
             {
-                abilityConstructorFields[i+2] = fieldValues[i];
+                abilityConstructorFields[i+2] = m_FieldValues[i];
             }
 
             foreach (object field in abilityConstructorFields)

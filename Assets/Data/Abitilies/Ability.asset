@@ -14,6 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AbilityField:
     m_ClassName: ProjectileAbility
-    m_FieldValues: []
+    m_FieldValues:
+    - m_FieldType: 7
+      m_Value: Projectile/Projectile
+      m_AssemblyQualifiedName: KarpysDev.Script.Behaviour.Projectile.BaseProjectile,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - m_FieldType: 1
+      m_Value: 0.5
+      m_AssemblyQualifiedName: 
+    - m_FieldType: 1
+      m_Value: 0
+      m_AssemblyQualifiedName: 
+    - m_FieldType: 1
+      m_Value: 0
+      m_AssemblyQualifiedName: 
     m_ConstructorId: 0
     m_IgnoreParams: 2
