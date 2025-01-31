@@ -55,6 +55,11 @@ namespace KarpysDev.Script.Behaviour
             }
         }
 
+        public void SetRange(float range)
+        {
+            m_Range = range;
+        }
+
         public override bool IsCompelte()
         {
             return m_InRangeAndTarget;

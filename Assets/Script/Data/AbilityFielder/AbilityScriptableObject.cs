@@ -28,7 +28,7 @@ namespace Script.Data.AbilityFielder
             GenerateFields();
             Type triggerClass = StringUtils.GetTypeViaClassName(m_AbilityField.ClassName);
 
-            if (triggerClass == null || triggerClass.BaseType != typeof(Ability))
+            if (triggerClass == null || !triggerClass.IsSubclassOf(typeof(Ability)))
             {
                 Debug.LogError("The ability class : " + m_AbilityField.ClassName + " is not recognized");
                 return null;

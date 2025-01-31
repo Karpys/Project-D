@@ -38,6 +38,7 @@ namespace KarpysDev.Script.Behaviour
             m_Source.Controller.ChangeMovementLockCount(1);
             m_Source.Controller.ChangeCastLockCount(1);
             m_Cooldown.Launch();
+            m_Source.Controller.LookAt.SetPoint(m_GroundCastAbilityRule.GroundHitPosition);
         }
 
         private void ThrowProjectile()

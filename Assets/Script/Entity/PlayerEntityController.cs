@@ -48,6 +48,10 @@ namespace KarpysDev.Script.Player
             {
                 TriggerCommand("Ability3");
                 m_PlayerEntity.Projectile.CastAbility();
+            }else if (Input.GetKeyDown(KeyCode.R))
+            {
+                TriggerCommand("Ability4");
+                m_PlayerEntity.ProjectileTarget.CastAbility();
             }
         }
         
