@@ -1,20 +1,14 @@
 fileFormatVersion: 2
-guid: 90abd5a35db78ef4cbda93f1a33b46c4
+guid: 5abe6697e420b47079635dcf565503ce
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
+      74: 6059336001588132254
+    second: Armature|Die
+  - first:
       74: -8945691123924629249
     second: Armature|Idle
-  - first:
-      74: 3859328789265635864
-    second: Armature|SwordAttack
-  - first:
-      74: 5152524018116331999
-    second: Armature|TPose
-  - first:
-      74: 8349542763059015795
-    second: Armature|Walk
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -98,7 +92,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: Bone
+    rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
@@ -106,7 +100,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
