@@ -14,11 +14,12 @@ namespace KarpysDev.Script.Behaviour
         [SerializeField] private Transform m_Root = null;
         [SerializeField] private Transform m_SpawnRoot = null;
         [SerializeField] private EntityController m_BaseController = null;
+        [SerializeField] private EntityLife m_EntityLife = null;
 
+        private bool m_IsDead = false;
         protected IController m_Controller = null;
         protected ISource m_Source = null;
         public EntityAnimator Animator => m_Animator;
-        public Transform Root => m_Root;
 
         public IController Controller => m_Controller;
 
@@ -35,12 +36,25 @@ namespace KarpysDev.Script.Behaviour
             if (source is EntitySource entitySource)
             {
                 Debug.Log("Damage from: " + entitySource.Entity.name);
+                
+                if(m_EntityLife)
+                    m_EntityLife.TakeDamage(damageSource.Damage);
             }
         }
 
         public BaseEntity GetSource()
         {
             return this;
+        }
+
+        public void TriggerDeath()
+        {
+            if(m_IsDead)
+                return;
+            
+            m_Controller.LookAt.ChangeLockCount(1);
+            m_IsDead = true;
+            m_Animator.PlayDefaultAnimation("Die");
         }
     }
 

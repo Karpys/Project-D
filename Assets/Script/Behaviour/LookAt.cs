@@ -13,10 +13,10 @@ namespace KarpysDev.Script.Behaviour
         [Header("Parameters")] 
         [SerializeField] private float m_Offset = 0f;
         [SerializeField] private float m_RotationSpeed = 0f;
+        [SerializeField] private Transform m_Target;
 
         private int m_LockCount = 0;
         private Vector3 m_Point;
-        private Transform m_Target;
         private void Update()
         {
             if(!m_Active || m_LockCount > 0)

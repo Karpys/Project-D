@@ -7,6 +7,10 @@ namespace KarpysDev.Script.Player
     {
         [SerializeField] private Animator m_Animator = null;
         
+        private string m_DefaultAnimationToPlay = String.Empty;
+        private string m_CurrentDefaultAnimation = String.Empty;
+        private float m_DefaultTransitionDuration = 0.05f;
+        
         private string m_TopAnimationToPlay = String.Empty;
         private string m_CurrentTopAnimation = String.Empty;
         private float m_TopTransitionDuration = 0.05f;
@@ -17,6 +21,13 @@ namespace KarpysDev.Script.Player
 
         public void AnimationCheck()
         {
+            if(m_DefaultAnimationToPlay != String.Empty)
+            {
+                m_Animator.CrossFadeInFixedTime(m_DefaultAnimationToPlay,m_DefaultTransitionDuration);
+                m_CurrentDefaultAnimation = m_DefaultAnimationToPlay;
+                m_DefaultAnimationToPlay = String.Empty;
+            }
+            
             if(m_TopAnimationToPlay != String.Empty)
             {
                 m_Animator.CrossFadeInFixedTime(m_TopAnimationToPlay,m_TopTransitionDuration);
@@ -32,6 +43,13 @@ namespace KarpysDev.Script.Player
             }
         }
 
+        public void PlayDefaultAnimation(string animationName, float duration = 0.05f, bool replay = true)
+        {
+            Debug.Log("Animation to play: " + animationName);
+            m_DefaultAnimationToPlay = animationName;
+            m_DefaultTransitionDuration = duration;
+        }
+        
         public void PlayTopAnimation(string animationName, float duration = 0.05f, bool replay = true)
         {
             Debug.Log("Animation to play: " + animationName);
