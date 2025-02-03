@@ -79,7 +79,7 @@ namespace KarpysDev.Script.Player
                 Vector3 playerPosition = playerRootTransform.position;
                 Vector3 newPosition = new Vector3(info.point.x, playerPosition.y, info.point.z);
                 m_Destination = newPosition;
-                m_NeedToReachDestination = true;
+                StartMovement();
                 m_EntityAnimator.PlayOrContinueBotAnimation("Walk");
                     
                 m_LookAt.SetPoint(m_Destination);
@@ -96,8 +96,8 @@ namespace KarpysDev.Script.Player
             base.SetTarget(targetable);
             m_LookAt.SetTarget(targetable.GetPivot);
             m_LookAt.Active(true);
-            m_NeedToReachDestination = true;
             m_EntityAnimator.PlayOrContinueBotAnimation("Walk");
+            StartMovement();
         }
         
         protected override void OnTargetReached()

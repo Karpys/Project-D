@@ -52,6 +52,7 @@ namespace KarpysDev.Script.Behaviour
             if(m_IsDead)
                 return;
             
+            m_Controller.ChangeMovementLockCount(1);
             m_Controller.LookAt.ChangeLockCount(1);
             m_IsDead = true;
             m_Animator.PlayDefaultAnimation("Die");

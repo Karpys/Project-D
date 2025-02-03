@@ -43,11 +43,6 @@ namespace Script.Data.AbilityFielder
                 abilityConstructorFields[i+2] = m_FieldValues[i];
             }
 
-            foreach (object field in abilityConstructorFields)
-            {
-                field.GetType().Log("Type");
-            }
-
             return (Ability)Activator.CreateInstance(triggerClass,abilityConstructorFields);
         }
     }

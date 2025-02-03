@@ -124,6 +124,11 @@ namespace KarpysDev.Script.Player
             m_EntityAnimator.PlayOrContinueBotAnimation("Idle",.25f);
         }
 
+        public void StartMovement()
+        {
+            m_NeedToReachDestination = true;
+        }
+
         public virtual void SetTarget(ITargetable targetable)
         {
             m_CurrentTargetable = targetable;
