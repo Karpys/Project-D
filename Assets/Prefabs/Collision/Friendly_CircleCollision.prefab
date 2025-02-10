@@ -25,9 +25,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1390151715416992751}
-  - component: {fileID: 6572696187663706041}
   - component: {fileID: 3843046225886679602}
-  - component: {fileID: 5094664695752115676}
+  - component: {fileID: 4745268518941911784}
+  - component: {fileID: 3257170831708386309}
   m_Layer: 8
   m_Name: Friendly_CircleCollision
   m_TagString: Untagged
@@ -50,19 +50,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &6572696187663706041
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8430846925842905429}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &3843046225886679602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,23 +62,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e227c800122740029d7c8539baa12c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Collider: {fileID: 6572696187663706041}
---- !u!54 &5094664695752115676
-Rigidbody:
+  m_Collider: {fileID: 4745268518941911784}
+  m_Active: 1
+--- !u!114 &4745268518941911784
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8430846925842905429}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a8b908d48d4787b4a52933baa88259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsActive: 1
+  m_AutoRegister: 1
+  m_Radius: 1
+--- !u!114 &3257170831708386309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8430846925842905429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 779e607516154d71a85cbf038939d843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CircleCollider: {fileID: 4745268518941911784}
+  m_BaseCollision: {fileID: 3843046225886679602}
+  m_Visual: {fileID: 5857866743295087093}
 --- !u!1001 &6251536938525849118
 PrefabInstance:
   m_ObjectHideFlags: 0

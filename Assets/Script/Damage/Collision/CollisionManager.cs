@@ -9,25 +9,23 @@
     {
         [SerializeField] private Transform m_CollisionParent = null;
 
-        [SerializeField] private BaseCollision m_FriendlyCircleCollision = null;
-        [SerializeField] private BaseCollision m_EnemyCircleCollision = null;
+        [SerializeField] private CircleCollisionInitializer m_FriendlyCircleCollisionInitializer = null;
+        [SerializeField] private CircleCollisionInitializer m_EnemyCircleCollisionInitializer = null;
         
-        public void CreateCircleCollision(EntityGroup entityGroup, Vector3 position, Action<ITargetable> onCollisionDetected, float range)
+        public void CreateCircleCollision(EntityGroup entityGroup, Vector3 position, Action<ITargetable> onCollisionDetected, float radius)
         {
-            BaseCollision baseCollision = null;
+            CircleCollisionInitializer circleCollisionInitializer = null;
             
             if (entityGroup == EntityGroup.Friendly)
             {
-                baseCollision = Instantiate(m_FriendlyCircleCollision, position, Quaternion.identity, m_CollisionParent);
+                circleCollisionInitializer = Instantiate(m_FriendlyCircleCollisionInitializer, position, Quaternion.identity, m_CollisionParent);
             }
             else
             {
-                baseCollision = Instantiate(m_EnemyCircleCollision, position, Quaternion.identity, m_CollisionParent);
+                circleCollisionInitializer = Instantiate(m_EnemyCircleCollisionInitializer, position, Quaternion.identity, m_CollisionParent);
             }
 
-            baseCollision.transform.localScale = new Vector3(range, 1, range);
-            baseCollision.OnCollisionDetected += onCollisionDetected;
-            baseCollision.Activate();
+            circleCollisionInitializer.Initialize(radius,onCollisionDetected);
         }
     }
 }

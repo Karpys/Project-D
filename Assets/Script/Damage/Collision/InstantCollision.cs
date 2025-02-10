@@ -1,30 +1,19 @@
 ﻿namespace KarpysDev.Script.Damage.Collision
 {
+    using System;
+    using Collider;
+
     public class InstantCollision : BaseCollision
     {
-        private bool m_IsActivate = false;
-        private bool m_ReadyToDisable = false;
-
         private void FixedUpdate()
         {
-            if(!m_IsActivate)
+            if(!m_Active)
                 return;
             
-            if (m_ReadyToDisable)
-            {
-                m_IsActivate = false;
-                Disable();
-                Destroy(gameObject,1f);
-                return;
-            }
-            
-            m_ReadyToDisable = true;
-        }
-        
-        public override void Activate()
-        {
-            base.Activate();
-            m_IsActivate = true;
+            m_Collider.SetActive(true);
+            m_Collider.Check(OnCollision);
+            Disable();
+            Destroy(gameObject,1f);
         }
     }
 }

@@ -1,13 +1,15 @@
 ﻿namespace KarpysDev.Script.Damage.Collision
 {
     using System;
+    using Collider;
     using KarpysUtils;
     using Player;
     using UnityEngine;
 
     public class BaseCollision : MonoBehaviour
     {
-        [SerializeField] private Collider m_Collider = null;
+        [SerializeField] protected BaseCollider m_Collider = null;
+        [SerializeField] protected bool m_Active = true;
         private Action<ITargetable> A_OnCollisionDetected = null;
 
         public Action<ITargetable> OnCollisionDetected
@@ -16,25 +18,30 @@
             set => A_OnCollisionDetected = value;
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void Awake()
         {
-            IDamageTargetable damageTargetable = other.GetComponentInChildren<IDamageTargetable>();
+            if(m_Active)
+                Activate();
+        }
+
+        protected void OnCollision(BaseCollider collider)
+        {
+            IDamageTargetable damageTargetable = collider.GetComponentInChildren<IDamageTargetable>();
 
             A_OnCollisionDetected?.Invoke(damageTargetable);
             damageTargetable?.GetPivot.name.Log("Collision Detected");
-            
-            //Todo:Add different type of Collision
-            //Continue / Instant / Multiple / Single
         }
 
         public virtual void Activate()
         {
-            m_Collider.enabled = true;
+            m_Active = true;
+            m_Collider.SetActive(true);
         }
         
         protected virtual void Disable()
         {
-            m_Collider.enabled = false;
+            m_Active = false;
+            m_Collider.SetActive(false);
         }
     }
 }

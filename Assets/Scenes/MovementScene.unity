@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 151118059}
   - component: {fileID: 151118061}
   - component: {fileID: 151118060}
+  - component: {fileID: 151118062}
   m_Layer: 6
   m_Name: Targetable
   m_TagString: Untagged
@@ -224,6 +225,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BaseEntity: {fileID: 1714080910}
+--- !u!114 &151118062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151118058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a8b908d48d4787b4a52933baa88259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsActive: 1
+  m_AutoRegister: 1
+  m_AutoDelete: 1
+  m_Radius: 1
 --- !u!1 &317942142 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5abe6697e420b47079635dcf565503ce, type: 3}
@@ -586,8 +603,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CollisionParent: {fileID: 979614465}
-  m_FriendlyCircleCollision: {fileID: 3843046225886679602, guid: b7fe67e48e0863540b9651a393af94d0, type: 3}
-  m_EnemyCircleCollision: {fileID: 3843046225886679602, guid: b7fe67e48e0863540b9651a393af94d0, type: 3}
+  m_FriendlyCircleCollisionInitializer: {fileID: 3257170831708386309, guid: b7fe67e48e0863540b9651a393af94d0, type: 3}
+  m_EnemyCircleCollisionInitializer: {fileID: 3257170831708386309, guid: b7fe67e48e0863540b9651a393af94d0, type: 3}
 --- !u!1 &979614464
 GameObject:
   m_ObjectHideFlags: 0
