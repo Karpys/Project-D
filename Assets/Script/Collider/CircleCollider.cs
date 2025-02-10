@@ -30,6 +30,29 @@
                     return false;
             }
         }
+        
+        #if UNITY_EDITOR
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.blue;
+            DrawCircle(transform.position, m_Radius, 50);
+        }
+
+        private void DrawCircle(Vector3 center, float radius, int segments)
+        {
+            float angleStep = 2 * Mathf.PI / segments;
+            Vector3 prevPoint = center + new Vector3(radius, 0, 0);
+
+            for (int i = 1; i <= segments; i++)
+            {
+                float angle = i * angleStep;
+                Vector3 newPoint = center + new Vector3(Mathf.Cos(angle) * radius, 0, Mathf.Sin(angle) * radius);
+                Gizmos.DrawLine(prevPoint, newPoint);
+                prevPoint = newPoint;
+            }
+        }
+        #endif
 
         #region Circle
         public override bool SquareCheck(CircleCollider circleCollider)
