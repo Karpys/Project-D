@@ -8,19 +8,12 @@
     public class BaseCollision : MonoBehaviour
     {
         [SerializeField] private Collider m_Collider = null;
-        [SerializeField] private float m_DestroyDelay = 1f;
         private Action<ITargetable> A_OnCollisionDetected = null;
 
         public Action<ITargetable> OnCollisionDetected
         {
             get => A_OnCollisionDetected;
             set => A_OnCollisionDetected = value;
-        }
-
-        //Todo: Destroy correctly
-        private void Start()
-        {
-            Destroy(gameObject,m_DestroyDelay);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -34,9 +27,14 @@
             //Continue / Instant / Multiple / Single
         }
 
-        public void Activate()
+        public virtual void Activate()
         {
             m_Collider.enabled = true;
+        }
+        
+        protected virtual void Disable()
+        {
+            m_Collider.enabled = false;
         }
     }
 }

@@ -586,8 +586,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CollisionParent: {fileID: 979614465}
-  m_FriendlyCircleCollision: {fileID: 2402452664097739321, guid: b7fe67e48e0863540b9651a393af94d0, type: 3}
-  m_EnemyCircleCollision: {fileID: 2402452664097739321, guid: b7fe67e48e0863540b9651a393af94d0, type: 3}
+  m_FriendlyCircleCollision: {fileID: 3843046225886679602, guid: b7fe67e48e0863540b9651a393af94d0, type: 3}
+  m_EnemyCircleCollision: {fileID: 3843046225886679602, guid: b7fe67e48e0863540b9651a393af94d0, type: 3}
 --- !u!1 &979614464
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,7 +26,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1390151715416992751}
   - component: {fileID: 6572696187663706041}
-  - component: {fileID: 2402452664097739321}
+  - component: {fileID: 3843046225886679602}
   - component: {fileID: 5094664695752115676}
   m_Layer: 8
   m_Name: Friendly_CircleCollision
@@ -62,8 +62,8 @@ SphereCollider:
   m_Enabled: 0
   serializedVersion: 2
   m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2402452664097739321
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &3843046225886679602
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8430846925842905429}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 652b2170fa4c46299cee922c3446420b, type: 3}
+  m_Script: {fileID: 11500000, guid: e227c800122740029d7c8539baa12c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Collider: {fileID: 6572696187663706041}
@@ -109,7 +109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 076be204fe563574fb26dc80704f1aa4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 076be204fe563574fb26dc80704f1aa4, type: 3}
       propertyPath: m_LocalPosition.z

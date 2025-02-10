@@ -9,11 +9,11 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Friendly
   m_Shader: {fileID: 4800000, guid: 5f109c04b0f8b2548bf38c41a6c1885a, type: 3}
-  m_ShaderKeywords: _VLIT
+  m_ShaderKeywords: _VCOL _VLIT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
