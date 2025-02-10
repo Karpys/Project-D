@@ -1,6 +1,5 @@
 ﻿namespace  KarpysDev.Script.Collider
 {
-    using System;
     using UnityEngine;
 
     public enum ColliderType
@@ -15,8 +14,6 @@
         [SerializeField] protected bool m_AutoDelete = true;
         public abstract bool IsColliding(BaseCollider collider);
         
-        public abstract ColliderType ColliderType { get; }
-
         public void SetActive(bool active)
         {
             m_IsActive = active;
@@ -35,7 +32,7 @@
         }
 
         #region Circle
-        public abstract bool SquareCheck(CircleCollider circleCollider);
+        public abstract bool SquareCheck(SquareCollider squareCollider);
 
         public abstract bool CircleCheck(CircleCollider circleCollider);
         #endregion
