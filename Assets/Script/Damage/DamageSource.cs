@@ -8,10 +8,10 @@
         public DamageType DamageType => m_DamageType;
         public float Damage => m_Damage;
 
-        public DamageSource(float ammount, DamageType damageType)
+        public DamageSource(float amount, DamageType damageType)
         {
             m_DamageType = damageType;
-            m_Damage = ammount;
+            m_Damage = amount;
         }
 
         public override string ToString()

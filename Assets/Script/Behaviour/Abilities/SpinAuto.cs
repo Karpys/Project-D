@@ -4,7 +4,10 @@ using UnityEngine;
 
 namespace KarpysDev.Script.Behaviour
 {
-    public class SpinAuto : Ability,IDamage
+    using Damage.Collision;
+    using Player;
+
+    public class SpinAuto : Ability
     {
         private IAnimator m_Animator = null;
         public SpinAuto(ISource source, AbilityRule abilityRule) : base(source,abilityRule)
@@ -22,6 +25,9 @@ namespace KarpysDev.Script.Behaviour
                 m_Source.Controller.LookAt.ChangeLockCount(-1);
                 m_Animator?.Animator.PlayTopAnimation("HoldSword",0.15f);
             });
+            
+            //Todo:Get the correct entity group
+            CollisionManager.Instance.CreateCircleCollision(EntityGroup.Friendly,m_Source.Root.position,ApplyDamage,3f);
         }
 
         protected override bool IsSpellCanBeCast()
@@ -29,9 +35,10 @@ namespace KarpysDev.Script.Behaviour
             return m_Source.Controller.CastLockCount <= 0;
         }
 
-        public void ApplyDamage(IDamageReceiver damageReceiver)
+        public void ApplyDamage(ITargetable targetable)
         {
-            damageReceiver.ReceiveDamage(new DamageSource(50f,DamageType.Physical),m_Source);
+            if(targetable is IDamageTargetable damageReceiver)
+                damageReceiver.DamageReceiver.ReceiveDamage(new DamageSource(50f,DamageType.Physical),m_Source);
         }
     }
 }
