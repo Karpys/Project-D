@@ -29,7 +29,7 @@ GameObject:
   - component: {fileID: 4745268518941911784}
   - component: {fileID: 3257170831708386309}
   m_Layer: 8
-  m_Name: Friendly_CircleCollision
+  m_Name: Friendly_CircleCollisionContinuous
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8430846925842905429}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e227c800122740029d7c8539baa12c97, type: 3}
+  m_Script: {fileID: 11500000, guid: f712c23017764bd586cea0381f89927e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Collider: {fileID: 4745268518941911784}
@@ -78,6 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IsActive: 1
   m_AutoRegister: 1
+  m_AutoDelete: 1
   m_Radius: 1
 --- !u!114 &3257170831708386309
 MonoBehaviour:

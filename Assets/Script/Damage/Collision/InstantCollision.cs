@@ -1,6 +1,5 @@
 ﻿namespace KarpysDev.Script.Damage.Collision
 {
-    using System;
     using Collider;
 
     public class InstantCollision : BaseCollision

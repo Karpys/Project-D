@@ -27,7 +27,7 @@ namespace KarpysDev.Script.Behaviour
             });
             
             //Todo:Get the correct entity group
-            CollisionManager.Instance.CreateCircleCollision(EntityGroup.Friendly,m_Source.Root.position,ApplyDamage,3f);
+            CollisionManager.Instance.CreateCircleCollision(EntityGroup.Friendly,m_Source.Root.position,ApplyDamage,CollisionType.Instant,3f);
         }
 
         protected override bool IsSpellCanBeCast()

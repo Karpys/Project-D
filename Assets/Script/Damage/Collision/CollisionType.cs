@@ -2,7 +2,7 @@
 {
     public enum CollisionType
     {
-        Circle,
-        Square,
+        Instant,
+        Continuous,
     }
 }

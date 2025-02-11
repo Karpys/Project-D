@@ -603,8 +603,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CollisionParent: {fileID: 979614465}
-  m_FriendlyCircleCollisionInitializer: {fileID: 3257170831708386309, guid: b7fe67e48e0863540b9651a393af94d0, type: 3}
-  m_EnemyCircleCollisionInitializer: {fileID: 3257170831708386309, guid: b7fe67e48e0863540b9651a393af94d0, type: 3}
+  m_FriendlyCircleCollisionInitializer:
+    m_Keys:
+    - Key: 0
+      Object: {fileID: 3257170831708386309, guid: b7fe67e48e0863540b9651a393af94d0, type: 3}
+    - Key: 1
+      Object: {fileID: 3257170831708386309, guid: 7c63f2265cb8e044c976b40e4cac79ed, type: 3}
+    m_ClearOnInit: 1
 --- !u!1 &979614464
 GameObject:
   m_ObjectHideFlags: 0

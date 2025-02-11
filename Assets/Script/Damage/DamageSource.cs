@@ -1,9 +1,12 @@
 ﻿namespace KarpysDev.Script.Damage
 {
+    using UnityEngine;
+
+    [System.Serializable]
     public class DamageSource
     {
-        private DamageType m_DamageType = DamageType.Physical;
-        private float m_Damage = 0f;
+        [SerializeField] private DamageType m_DamageType = DamageType.Physical;
+        [SerializeField] private float m_Damage = 0f;
 
         public DamageType DamageType => m_DamageType;
         public float Damage => m_Damage;

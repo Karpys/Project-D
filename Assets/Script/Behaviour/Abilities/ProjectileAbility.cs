@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace KarpysDev.Script.Behaviour
 {
+    using Damage.Collision;
+    using Player;
+
     public class ProjectileAbility : Ability,IUpdater
     {
         private BaseProjectile m_ProjectilePrefab = null;
@@ -13,6 +16,7 @@ namespace KarpysDev.Script.Behaviour
         
         private float m_LockTime = 0.5f;
         private float m_ThrowDelay = 0.5f;
+        private bool m_HasCollide = false;
 
         private Clocker m_Cooldown = null;
         private IMethodDelayer m_MethodDelayer = new LinkedListMethodDelayer();
@@ -46,9 +50,10 @@ namespace KarpysDev.Script.Behaviour
             m_Source.Controller.LookAt.SetPoint(m_GroundCastAbilityRule.GroundHitPosition);
             Vector3 spawnPosition = m_Source.SpawnRoot.transform.position;
             BaseProjectile proj = GameObject.Instantiate(m_ProjectilePrefab, spawnPosition, Quaternion.identity);
+            proj.Initialize(m_Source);
             proj.SetDestination(m_GroundCastAbilityRule.GroundHitPosition + new Vector3(0,spawnPosition.y,0));
+            CollisionManager.Instance.CreateCircleCollision(EntityGroup.Friendly, proj.transform.position, proj.OnCollision, CollisionType.Continuous, 1, proj.transform);
         }
-
         protected override bool IsSpellCanBeCast()
         {
             return m_Cooldown.IsReady && m_Source.Controller.CastLockCount <= 0;
