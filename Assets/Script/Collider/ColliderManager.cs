@@ -61,5 +61,84 @@
             
             return distanceSquared <= radiusSq;
         }
+
+        #region SquareSquare
+        public static bool SquareSquareCheck(SquareCollider squareCollider, SquareCollider squareCollider1)
+        {
+            Vector3[] cornersA = GetRotatedCorners(squareCollider);
+            Vector3[] cornersB = GetRotatedCorners(squareCollider1);
+
+            Vector3[] axes = {
+                GetEdgeNormal(cornersA[0], cornersA[1]),
+                GetEdgeNormal(cornersA[1], cornersA[2]),
+                GetEdgeNormal(cornersB[0], cornersB[1]),
+                GetEdgeNormal(cornersB[1], cornersB[2])
+            };
+
+            foreach (var axis in axes)
+            {
+                if (!ProjectionsOverlap(cornersA, cornersB, axis))
+                    return false;
+            }
+
+            return true;
+        }
+
+
+        private static Vector3[] GetRotatedCorners(SquareCollider square)
+        {
+            float halfW = square.Width * 0.5f;
+            float halfH = square.Height * 0.5f;
+            float angleRad = -square.transform.eulerAngles.y * Mathf.Deg2Rad;
+            
+            Vector3 center = square.transform.position;
+
+            return new Vector3[]
+            {
+                center + RotatePoint(new Vector3(-halfW, 0, -halfH), angleRad),
+                center + RotatePoint(new Vector3(halfW, 0, -halfH), angleRad),
+                center + RotatePoint(new Vector3(halfW, 0, halfH), angleRad),
+                center + RotatePoint(new Vector3(-halfW, 0, halfH), angleRad)
+            };
+        }
+
+        private static Vector3 RotatePoint(Vector3 point, float angleRad)
+        {
+            float cos = Mathf.Cos(angleRad);
+            float sin = Mathf.Sin(angleRad);
+            return new Vector3(
+                point.x * cos - point.z * sin,
+                0,
+                point.x * sin + point.z * cos
+            );
+        }
+
+        private static Vector3 GetEdgeNormal(Vector3 p1, Vector3 p2)
+        {
+            Vector3 edge = p2 - p1;
+            return new Vector3(-edge.z, 0, edge.x).normalized;
+        }
+
+        private static bool ProjectionsOverlap(Vector3[] cornersA, Vector3[] cornersB, Vector3 axis)
+        {
+            float minA, maxA, minB, maxB;
+            ProjectCorners(cornersA, axis, out minA, out maxA);
+            ProjectCorners(cornersB, axis, out minB, out maxB);
+
+            return maxA >= minB && maxB >= minA;
+        }
+
+        private static void ProjectCorners(Vector3[] corners, Vector3 axis, out float min, out float max)
+        {
+            min = max = Vector3.Dot(corners[0], axis);
+            for (int i = 1; i < corners.Length; i++)
+            {
+                float projection = Vector3.Dot(corners[i], axis);
+                if (projection < min) min = projection;
+                if (projection > max) max = projection;
+            }
+        }
+
+        #endregion
     }
 }

@@ -58,7 +58,7 @@
         #region Square
         public override bool SquareCheck(SquareCollider squareCollider)
         {
-            return false;
+            return ColliderManager.SquareSquareCheck(squareCollider, this);
         }
         #endregion
     }
