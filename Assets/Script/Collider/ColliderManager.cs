@@ -40,18 +40,26 @@
         {
             Vector3 circlePos = circleCollider.transform.position;
             Vector3 squarePos = squareCollider.transform.position;
-            
-            float halfWidth = squareCollider.Width / 2f;
-            float halfHeight = squareCollider.Height / 2f;
-            
-            float closestX = Mathf.Clamp(circlePos.x, squarePos.x - halfWidth, squarePos.x + halfWidth);
-            float closestZ = Mathf.Clamp(circlePos.z, squarePos.z - halfHeight, squarePos.z + halfHeight);
+    
+            float halfWidth = squareCollider.Width * 0.5f;
+            float halfHeight = squareCollider.Height * 0.5f;
+            float radiusSq = circleCollider.Radius * circleCollider.Radius;
 
-            float distanceX = circlePos.x - closestX;
-            float distanceZ = circlePos.z - closestZ;
+            float angleRad = squareCollider.transform.eulerAngles.y * Mathf.Deg2Rad;
+            float cos = Mathf.Cos(angleRad);
+            float sin = Mathf.Sin(angleRad);
+
+            float localX = cos * (circlePos.x - squarePos.x) - sin * (circlePos.z - squarePos.z);
+            float localZ = sin * (circlePos.x - squarePos.x) + cos * (circlePos.z - squarePos.z);
+
+            float closestX = Mathf.Clamp(localX, -halfWidth, halfWidth);
+            float closestZ = Mathf.Clamp(localZ, -halfHeight, halfHeight);
+
+            float distanceX = localX - closestX;
+            float distanceZ = localZ - closestZ;
             float distanceSquared = distanceX * distanceX + distanceZ * distanceZ;
-
-            return distanceSquared <= circleCollider.Radius * circleCollider.Radius;
+            
+            return distanceSquared <= radiusSq;
         }
     }
 }

@@ -23,8 +23,30 @@
         private void OnDrawGizmos()
         {
             Gizmos.color = ColliderManager.GizmosColor;
-            Gizmos.DrawWireCube(transform.position, new Vector3(m_Width, 0, m_Height));
+            
+            float halfW = m_Width * 0.5f;
+            float halfH = m_Height * 0.5f;
+            float angleRad = -transform.eulerAngles.y * Mathf.Deg2Rad;
+
+            Vector3[] corners = new Vector3[4];
+            corners[0] = transform.position + RotatePoint(new Vector3(-halfW, 0, -halfH), angleRad);
+            corners[1] = transform.position + RotatePoint(new Vector3(halfW, 0, -halfH), angleRad);
+            corners[2] = transform.position + RotatePoint(new Vector3(halfW, 0, halfH), angleRad);
+            corners[3] = transform.position + RotatePoint(new Vector3(-halfW, 0, halfH), angleRad);
+
+            Gizmos.DrawLine(corners[0], corners[1]);
+            Gizmos.DrawLine(corners[1], corners[2]);
+            Gizmos.DrawLine(corners[2], corners[3]);
+            Gizmos.DrawLine(corners[3], corners[0]);
         }
+        
+        private Vector3 RotatePoint(Vector3 point, float angleRad)
+        {
+            float cos = Mathf.Cos(angleRad);
+            float sin = Mathf.Sin(angleRad);
+            return new Vector3(point.x * cos - point.z * sin, 0, point.x * sin + point.z * cos);
+        }
+        
         #endif
         #region Circle
         public override bool CircleCheck(CircleCollider circleCollider)

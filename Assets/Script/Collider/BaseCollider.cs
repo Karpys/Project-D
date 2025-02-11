@@ -1,12 +1,6 @@
 ﻿namespace  KarpysDev.Script.Collider
 {
     using UnityEngine;
-
-    public enum ColliderType
-    {
-        Square,
-        Circle,
-    }
     public abstract class BaseCollider : MonoBehaviour
     {
         [SerializeField] protected bool m_IsActive = true;
