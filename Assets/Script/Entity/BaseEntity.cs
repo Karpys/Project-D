@@ -5,6 +5,8 @@ using UnityEngine;
 
 namespace KarpysDev.Script.Behaviour
 {
+    using UI;
+
     public class BaseEntity : MonoBehaviour,IDamageReceiver
     {
         [Header("Entity Info")]
@@ -36,9 +38,12 @@ namespace KarpysDev.Script.Behaviour
             if (source is EntitySource entitySource)
             {
                 Debug.Log("Damage from: " + entitySource.Entity.name);
-                
-                if(m_EntityLife)
+
+                if (m_EntityLife)
+                {
                     m_EntityLife.TakeDamage(damageSource.Damage);
+                    CanvasDamage.Instance.SpawnDamage(transform,damageSource);
+                }
             }
         }
 
