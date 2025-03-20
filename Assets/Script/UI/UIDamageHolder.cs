@@ -13,12 +13,12 @@ namespace KarpysDev.Script.UI
         {
             _damageText.text = "" + damageSource.Damage;
             _damageText.color = ColorLibrary.Instance.GetDamageColor(damageSource.DamageType);
-            Invoke("Return",1);
+            Invoke("Return",CanvasDamage.RETURN_TEXT_DURATION);
         }
 
-        public void Place(Transform origin)
+        public void Place(Vector3 position)
         {
-            transform.position = Camera.main.WorldToScreenPoint(origin.position);
+            transform.position = position;
         }
 
         public void Return()
