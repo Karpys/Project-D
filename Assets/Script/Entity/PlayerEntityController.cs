@@ -9,8 +9,7 @@ namespace KarpysDev.Script.Player
         [SerializeField] private PlayerEntity m_PlayerEntity = null;
         [SerializeField] private Camera m_PointCamera = null;
         [SerializeField] protected LayerMask m_EnemyLayerMask;
-
-
+        
         private string m_LastCommandId = String.Empty;
         protected override void EntityActionUpdate()
         {
@@ -51,7 +50,7 @@ namespace KarpysDev.Script.Player
             }else if (Input.GetKeyDown(KeyCode.R))
             {
                 TriggerCommand("Ability4");
-                m_PlayerEntity.ProjectileTarget.CastAbility();
+                m_PlayerEntity.TormentPulse.CastAbility();
             }
         }
         
