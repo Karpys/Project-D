@@ -1,6 +1,4 @@
-﻿using KarpysDev.Script.Behaviour.Projectile;
-using KarpysDev.Script.Player;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace KarpysDev.Script.Behaviour
 {

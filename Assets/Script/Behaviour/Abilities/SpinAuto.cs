@@ -5,6 +5,7 @@ using UnityEngine;
 namespace KarpysDev.Script.Behaviour
 {
     using Damage.Collision;
+    using Entity;
     using Player;
 
     public class SpinAuto : Ability
@@ -20,14 +21,14 @@ namespace KarpysDev.Script.Behaviour
         {
             m_Animator?.Animator.PlayTopAnimation("SpinSword",0.25f);
             m_Source.Controller.LookAt.ChangeLockCount(1);
-            m_Source.Root.transform.DoRotate(new Vector3(0, 360,0),.3f).SetMode(TweenMode.ADDITIVE).OnComplete(() =>
+            m_Source.Root.GetRoot(RootPosition.Root).DoRotate(new Vector3(0, 360,0),.3f).SetMode(TweenMode.ADDITIVE).OnComplete(() =>
             {
                 m_Source.Controller.LookAt.ChangeLockCount(-1);
                 m_Animator?.Animator.PlayTopAnimation("HoldSword",0.15f);
             });
             
             //Todo:Get the correct entity group
-            CollisionManager.Instance.CreateCircleCollision(EntityGroup.Friendly,m_Source.Root.position,ApplyDamage,CollisionType.Instant,3f);
+            CollisionManager.Instance.CreateCircleCollision(EntityGroup.Friendly,m_Source.Root.GetRoot(RootPosition.Root).position,ApplyDamage,CollisionType.Instant,3f);
         }
 
         protected override bool IsSpellCanBeCast()

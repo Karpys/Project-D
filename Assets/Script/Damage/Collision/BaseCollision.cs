@@ -26,9 +26,10 @@
 
         protected void OnCollision(BaseCollider collider)
         {
-            collider.transform.name.Log("Collision Detected");
-            IDamageTargetable damageTargetable = collider.GetComponentInChildren<IDamageTargetable>();
-            A_OnCollisionDetected?.Invoke(damageTargetable);
+            m_Collider.transform.name.Log("Collision Detected with : " + collider.transform.name);
+            ITargetable damageTargetable = collider.GetComponentInChildren<ITargetable>();
+            if(damageTargetable != null)
+                A_OnCollisionDetected?.Invoke(damageTargetable);
         }
 
         public virtual void Activate()

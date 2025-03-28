@@ -1,12 +1,13 @@
 using KarpysDev.Script.Behaviour;
-using UnityEngine;
 
 namespace KarpysDev.Script.Damage
 {
+    using Entity;
+
     public interface ISource
     { 
         public IController Controller {get;}
-        public Transform Root {get;}
-        public Transform SpawnRoot {get;}
+        //Encapsulate Root / Spawn Root in an interface with enum call
+        public IRoot Root { get; }
     }
 }

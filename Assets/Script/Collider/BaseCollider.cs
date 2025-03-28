@@ -6,6 +6,9 @@
         [SerializeField] protected bool m_IsActive = true;
         [SerializeField] protected bool m_AutoRegister = true;
         [SerializeField] protected bool m_AutoDelete = true;
+        
+        public bool IsActive => m_IsActive;
+
         public abstract bool IsColliding(BaseCollider collider);
         
         public void SetActive(bool active)

@@ -2,6 +2,7 @@ namespace KarpysDev.Script.Behaviour
 {
     using Damage;
     using Damage.Collision;
+    using Entity;
     using Projectile;
     using UnityEngine;
 
@@ -19,7 +20,7 @@ namespace KarpysDev.Script.Behaviour
         {
             base.Trigger();
             
-            Vector3 spawnPosition = m_Source.SpawnRoot.transform.position;
+            Vector3 spawnPosition = m_Source.Root.GetRoot(RootPosition.Root).transform.position;
             BaseProjectile proj = GameObject.Instantiate(m_BaseProjectilePrefab, spawnPosition, Quaternion.identity);
             Vector3 destination = m_Targetable.GetPivot.position;
             destination.y = spawnPosition.y;

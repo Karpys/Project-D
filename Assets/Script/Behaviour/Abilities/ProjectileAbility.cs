@@ -7,6 +7,7 @@ using UnityEngine;
 namespace KarpysDev.Script.Behaviour
 {
     using Damage.Collision;
+    using Entity;
     using Player;
 
     public class ProjectileAbility : Ability,IUpdater
@@ -45,10 +46,11 @@ namespace KarpysDev.Script.Behaviour
             m_Source.Controller.LookAt.SetPoint(m_GroundCastAbilityRule.GroundHitPosition);
         }
 
+        //Throw Projectile via interface IProjectileThrower//
         private void ThrowProjectile()
         {
             m_Source.Controller.LookAt.SetPoint(m_GroundCastAbilityRule.GroundHitPosition);
-            Vector3 spawnPosition = m_Source.SpawnRoot.transform.position;
+            Vector3 spawnPosition = m_Source.Root.GetRoot(RootPosition.Root).transform.position;
             BaseProjectile proj = GameObject.Instantiate(m_ProjectilePrefab, spawnPosition, Quaternion.identity);
             proj.Initialize(m_Source);
             proj.SetDestination(m_GroundCastAbilityRule.GroundHitPosition + new Vector3(0,spawnPosition.y,0));

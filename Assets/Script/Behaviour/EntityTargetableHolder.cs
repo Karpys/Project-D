@@ -10,5 +10,6 @@ namespace KarpysDev.Script.Behaviour
 
         public Transform GetPivot => m_BaseEntity.transform;
         public IDamageReceiver DamageReceiver => m_BaseEntity;
+        public ISource Source => m_BaseEntity.Source;
     }
 }

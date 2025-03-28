@@ -2,6 +2,8 @@
 {
     using Damage;
     using Damage.Collision;
+    using Entity;
+    using global::Script.Fx;
     using KarpysUtils;
     using Player;
 
@@ -45,7 +47,7 @@
             m_PulseClock.Restart(m_PulseDelay);
             m_CurrentEnemyPulseCount = 0;
             //Directly Check Surrounding enemies instead of create collision
-            CollisionManager.Instance.CreateCircleCollision(EntityGroup.Enemy,m_Source.Root.position,OnCollision
+            CollisionManager.Instance.CreateCircleCollision(EntityGroup.Enemy,m_Source.Root.GetRoot(RootPosition.Root).position,OnCollision
                 ,CollisionType.Instant,m_PulseRadius);
         }
 
@@ -58,6 +60,8 @@
             
             if(targetable is IDamageTargetable damageTargetable)
                 damageTargetable.DamageReceiver.ReceiveDamage(new DamageSource(20,DamageType.Ice),m_Source);
+            
+            FxManager.Instance.CreateTormentPulseFx(targetable.Source.Root.GetRoot(RootPosition.Chest),m_Source.Root.GetRoot(RootPosition.Chest));
         }
 
         protected override bool IsSpellCanBeCast()

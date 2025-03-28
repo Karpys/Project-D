@@ -21,11 +21,17 @@
 
         public static void CollisionCheck(BaseCollider collider, Action<BaseCollider> onCollision)
         {
+            if(!collider.IsActive)
+                return;
+            
             foreach (BaseCollider otherCollider in m_Colliders)
             {
                 if(otherCollider == collider)
                     continue;
                 
+                if(!otherCollider.IsActive)
+                    continue;
+                         
                 if(collider.IsColliding(otherCollider))
                     onCollision?.Invoke(otherCollider);
             }

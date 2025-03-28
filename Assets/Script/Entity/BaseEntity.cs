@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace KarpysDev.Script.Behaviour
 {
+    using Entity;
     using UI;
 
     public class BaseEntity : MonoBehaviour,IDamageReceiver
@@ -17,6 +18,7 @@ namespace KarpysDev.Script.Behaviour
         [SerializeField] private Transform m_SpawnRoot = null;
         [SerializeField] private EntityController m_BaseController = null;
         [SerializeField] private EntityLife m_EntityLife = null;
+        [SerializeField] private DefaultRoot m_DefaultRoot = null;
 
         private bool m_IsDead = false;
         protected IController m_Controller = null;
@@ -24,11 +26,19 @@ namespace KarpysDev.Script.Behaviour
         public EntityAnimator Animator => m_Animator;
 
         public IController Controller => m_Controller;
+        public ISource Source => m_Source;
 
         protected virtual void Awake()
         {
             m_Controller = m_BaseController;
-            m_Source = new EntitySource(this, m_Animator, m_Root,m_SpawnRoot,m_BaseController);
+            m_Source = new EntitySource(this, m_Animator,m_SpawnRoot,m_BaseController,GetRoot());
+        }
+
+        private IRoot GetRoot()
+        {
+            if (m_DefaultRoot == null)
+                return new SimpleRoot(transform);
+            return m_DefaultRoot;
         }
 
         public void ReceiveDamage(DamageSource damageSource,ISource source)
@@ -45,11 +55,6 @@ namespace KarpysDev.Script.Behaviour
                     CanvasDamage.Instance.SpawnDamage(transform,damageSource);
                 }
             }
-        }
-
-        public BaseEntity GetSource()
-        {
-            return this;
         }
 
         public void TriggerDeath()

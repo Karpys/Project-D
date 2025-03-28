@@ -26,7 +26,7 @@ Material:
     m_Floats:
     - _PulseMaxX: 0.1
     - _PulseMinX: 0
-    - _PulseRange: 0.1
+    - _PulseRange: 0.05
     - _PulseSpeed: 2
     m_Colors:
     - _Color: {r: 0.44309756, g: 0, b: 0.7075472, a: 0}
