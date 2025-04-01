@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TormentPulse
-  m_Shader: {fileID: 4800000, guid: d294326349f6c6a41a5e98c9ebcce212, type: 3}
+  m_Shader: {fileID: 4800000, guid: 7fd6375f75d34e54aafbb09c973fd2a1, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,16 +19,31 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _MainTex:
+    - _DecalTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: ad7a2757eb95bde47a9cf34821004911, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _PulseMaxX: 0.1
-    - _PulseMinX: 0
-    - _PulseRange: 0.05
-    - _PulseSpeed: 2
+    - PixelSnap: 0
+    - _Decal: 0
+    - _Loop: 0
+    - _MultLoop: 1.2
+    - _PulseRange: 0.4
+    - _PulseSpeed: 1
+    - _Scale: 40
+    - _Speed: 10
+    - _Split: 0
+    - _Threshold: 0
+    - _TransparancyPulse: 1
+    - _TransparencyPulse: 0.767
     m_Colors:
-    - _Color: {r: 0.44309756, g: 0, b: 0.7075472, a: 0}
-    - _PulseColor: {r: 1, g: 1, b: 1, a: 0}
+    - _Color: {r: 0.8125288, g: 0.1745283, b: 1, a: 0.5176471}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _PulseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Scale: {r: 5, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
