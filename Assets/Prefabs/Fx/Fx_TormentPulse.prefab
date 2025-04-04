@@ -76,7 +76,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 12}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.35
+    widthMultiplier: 0.25
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -127,7 +127,7 @@ LineRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_UseWorldSpace: 1
+  m_UseWorldSpace: 0
   m_Loop: 0
 --- !u!1 &4662201154450956217
 GameObject:
@@ -174,4 +174,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_LineRenderer: {fileID: 882537330}
-  m_PulseTime: 0.25
+  m_PulseTime: 0.5
+  m_FadeTime: 0.25

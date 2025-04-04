@@ -1,11 +1,13 @@
 namespace Script.Fx
 {
+    using KarpysDev.KarpysUtils.TweenCustom;
     using UnityEngine;
 
     public class TormentPulseFx : MonoBehaviour
     {
         [SerializeField] private LineRenderer m_LineRenderer = null;
         [SerializeField] private float m_PulseTime = 1;
+        [SerializeField] private float m_FadeTime = 0.5f;
 
         private Transform m_PointA = null;
         private Transform m_PointB = null;
@@ -31,18 +33,24 @@ namespace Script.Fx
             m_LineRenderer.SetPosition(0,m_PointA.position);
             m_LineRenderer.SetPosition(1,m_PointB.position);
             
-            m_LineRenderer.material.SetFloat("_Scale",ComputeScale());
+            //m_LineRenderer.material.SetFloat("_Scale",ComputeScale());
         }
 
-        private float ComputeScale()
-        {
-            float dist = Vector3.Distance(m_PointA.position, m_PointB.position);
-            return dist / m_LineWidth;
-        }
+        // private float ComputeScale()
+        // {
+        //     float dist = Vector3.Distance(m_PointA.position, m_PointB.position);
+        //     return dist / m_LineWidth;
+        // }
 
         private void Return()
         {
-            Destroy(gameObject);
+            StartFadeOut();
+            Destroy(gameObject,m_FadeTime);
+        }
+
+        private void StartFadeOut()
+        {
+            m_LineRenderer.material.DoShaderValue("_Fade", 1, 0, m_FadeTime);
         }
     }
 }
