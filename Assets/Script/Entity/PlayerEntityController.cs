@@ -46,7 +46,7 @@ namespace KarpysDev.Script.Player
             }else if (Input.GetKeyDown(KeyCode.E))
             {
                 TriggerCommand("Ability3");
-                m_PlayerEntity.Projectile.CastAbility();
+                m_PlayerEntity.SpinSpin.CastAbility();
             }else if (Input.GetKeyDown(KeyCode.R))
             {
                 TriggerCommand("Ability4");

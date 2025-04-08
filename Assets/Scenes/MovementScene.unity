@@ -1195,6 +1195,7 @@ MonoBehaviour:
     - Key: 1
       Object: {fileID: 3257170831708386309, guid: 7c63f2265cb8e044c976b40e4cac79ed, type: 3}
     m_ClearOnInit: 1
+  m_FriendlyCircleDelayCollisionInitializer: {fileID: 0}
 --- !u!1 &804401435
 GameObject:
   m_ObjectHideFlags: 0
@@ -2582,6 +2583,10 @@ PrefabInstance:
       propertyPath: m_BackGroundColor.r
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7134173555516631760, guid: 88e3f9d7633d95a40853d1c76bf2ff6d, type: 3}
+      propertyPath: m_SpinSpinAbilityScriptableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: b0e68b0bb30feaa419d69842b77639bf, type: 2}
     - target: {fileID: 7134173555516631760, guid: 88e3f9d7633d95a40853d1c76bf2ff6d, type: 3}
       propertyPath: m_ProjectileAbilityScriptableObject
       value: 

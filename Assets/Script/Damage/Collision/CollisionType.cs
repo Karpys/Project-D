@@ -4,5 +4,6 @@
     {
         Instant,
         Continuous,
+        ContinuousDelay,
     }
 }

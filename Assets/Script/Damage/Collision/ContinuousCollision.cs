@@ -1,7 +1,6 @@
 ﻿namespace KarpysDev.Script.Damage.Collision
 {
     using Collider;
-    using UnityEngine;
 
     public class ContinuousCollision : BaseCollision
     {
