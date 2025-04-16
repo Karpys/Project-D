@@ -10,7 +10,7 @@ namespace KarpysDev.Script.Behaviour
     {
         private BaseProjectile m_BaseProjectilePrefab = null;
         
-        public ProjectileTargetAbility(ISource source, PlayerPointTargetableAbilityRule abilityRule, BaseProjectile projectilePrefab,float range) : base(source, abilityRule)
+        public ProjectileTargetAbility(ISource source, PlayerPointTargetableAbilityRule abilityRule, AbilityRestriction abilityRestriction, BaseProjectile projectilePrefab,float range) : base(source, abilityRule,abilityRestriction)
         {
             m_BaseProjectilePrefab = projectilePrefab;
             abilityRule.SetRange(range);

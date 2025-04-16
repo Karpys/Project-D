@@ -31,13 +31,13 @@ namespace KarpysDev.Script.Behaviour
         protected override void Awake()
         {
             base.Awake();
-            m_AutoAttack = new AutoAttack(m_Source,new PlayerPointTargetableAbilityRule(transform,m_AttackRange,m_Controller),0.5f,0.2f);
-            m_SpinAuto = new SpinAuto(m_Source,new NoRule());
+            m_AutoAttack = new AutoAttack(m_Source,new PlayerPointTargetableAbilityRule(transform,m_AttackRange,m_Controller), new NoRestriction(),0.5f,0.2f);
+            m_SpinAuto = new SpinAuto(m_Source,new NoRule(), new CooldownRestriction(5));
             //Add Spell Rule Giver, interface giver of GroundCast PlayerPoint ect//
-            m_Projectile = m_ProjectileAbilityScriptableObject.CreateBaseAbility(m_Source, new GroundCastAbilityRule());
-            m_ProjectileTarget = m_ProjectileTargetAbilityScriptableObject.CreateBaseAbility(m_Source, new PlayerPointTargetableAbilityRule(transform, m_AttackRange, m_Controller));
-            m_TormentPulse = m_TormentPulseAbilityScriptableObject.CreateBaseAbility(m_Source, new NoRule());
-            m_SpinSpin = m_SpinSpinAbilityScriptableObject.CreateBaseAbility(m_Source, new NoRule());
+            m_Projectile = m_ProjectileAbilityScriptableObject.CreateBaseAbility(m_Source, new GroundCastAbilityRule(), new NoRestriction());
+            m_ProjectileTarget = m_ProjectileTargetAbilityScriptableObject.CreateBaseAbility(m_Source, new PlayerPointTargetableAbilityRule(transform, m_AttackRange, m_Controller), new NoRestriction());
+            m_TormentPulse = m_TormentPulseAbilityScriptableObject.CreateBaseAbility(m_Source, new NoRule(), new NoRestriction());
+            m_SpinSpin = m_SpinSpinAbilityScriptableObject.CreateBaseAbility(m_Source, new NoRule() ,new NoRestriction());
             
             AddAbility(m_AutoAttack);
             AddAbility(m_SpinAuto);

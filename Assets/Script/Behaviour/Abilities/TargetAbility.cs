@@ -8,7 +8,7 @@ namespace KarpysDev.Script.Behaviour
         protected PlayerPointTargetableAbilityRule m_PlayerPointTargetableAbilityRule = null;
         protected ITargetable m_Targetable = null;
 
-        protected TargetAbility(ISource source, PlayerPointTargetableAbilityRule abilityRule) : base(source, abilityRule)
+        protected TargetAbility(ISource source, PlayerPointTargetableAbilityRule abilityRule, AbilityRestriction abilityRestriction) : base(source, abilityRule, abilityRestriction)
         {
             m_PlayerPointTargetableAbilityRule = abilityRule;
         }
@@ -16,11 +16,6 @@ namespace KarpysDev.Script.Behaviour
         protected override void Trigger()
         {
             m_Targetable = m_PlayerPointTargetableAbilityRule.Targetable;
-        }
-        
-        protected override bool IsSpellCanBeCast()
-        {
-            return true;
         }
     }
 }

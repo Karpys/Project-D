@@ -17,7 +17,7 @@
         private int m_MaxEnemy = 1;
 
         private int m_CurrentEnemyPulseCount = 0;
-        public TormentPulse(ISource source, AbilityRule abilityRule, float pulseDelay, float pulseRadius, int maxEnemy) : base(source, abilityRule)
+        public TormentPulse(ISource source, AbilityRule abilityRule, AbilityRestriction abilityRestriction, float pulseDelay, float pulseRadius, int maxEnemy) : base(source, abilityRule, abilityRestriction)
         {
             m_PulseDelay = pulseDelay;
             m_PulseRadius = pulseRadius;
@@ -62,11 +62,6 @@
                 damageTargetable.DamageReceiver.ReceiveDamage(new DamageSource(20,DamageType.Ice),m_Source);
             
             FxManager.Instance.CreateTormentPulseFx(targetable.Source.Root.GetRoot(RootPosition.Chest),m_Source.Root.GetRoot(RootPosition.Chest));
-        }
-
-        protected override bool IsSpellCanBeCast()
-        {
-            return true;
         }
     }
 }

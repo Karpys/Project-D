@@ -21,7 +21,7 @@ namespace KarpysDev.Script.Behaviour
 
         private Clocker m_Cooldown = null;
         private IMethodDelayer m_MethodDelayer = new LinkedListMethodDelayer();
-        public ProjectileAbility(ISource source, GroundCastAbilityRule abilityRule,BaseProjectile projectilePrefab,float lockTime,float launchDelay,float cooldown) : base(source, abilityRule)
+        public ProjectileAbility(ISource source, GroundCastAbilityRule abilityRule, AbilityRestriction abilityRestriction, BaseProjectile projectilePrefab, float lockTime,float launchDelay,float cooldown) : base(source, abilityRule, abilityRestriction)
         {
             m_ProjectilePrefab = projectilePrefab;
             m_GroundCastAbilityRule = abilityRule;
@@ -55,10 +55,6 @@ namespace KarpysDev.Script.Behaviour
             proj.Initialize(m_Source);
             proj.SetDestination(m_GroundCastAbilityRule.GroundHitPosition + new Vector3(0,spawnPosition.y,0));
             CollisionManager.Instance.CreateCircleCollision(EntityGroup.Friendly, proj.transform.position, proj.OnCollision, CollisionType.Continuous, 1, proj.transform);
-        }
-        protected override bool IsSpellCanBeCast()
-        {
-            return m_Cooldown.IsReady && m_Source.Controller.CastLockCount <= 0;
         }
 
         public void Update()

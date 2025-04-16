@@ -18,7 +18,7 @@
 
         private Clock m_SpinClock = null;
         
-        public SpinSpin(ISource source, AbilityRule abilityRule,float spinSpeed,int spinCount) : base(source, abilityRule)
+        public SpinSpin(ISource source, AbilityRule abilityRule, AbilityRestriction abilityRestriction, float spinSpeed, int spinCount) : base(source, abilityRule, abilityRestriction)
         {
             if (source.Controller is IAnimator animator)
                 m_Animator = animator;
@@ -88,12 +88,7 @@
             if(targetable is IDamageTargetable damageTargetable)
                 damageTargetable.DamageReceiver.ReceiveDamage(new DamageSource(20,DamageType.Physical),m_Source);
         }
-
-        protected override bool IsSpellCanBeCast()
-        {
-            return true;
-        }
-
+        
         public void Update()
         {
             m_SpinClock?.UpdateClock();

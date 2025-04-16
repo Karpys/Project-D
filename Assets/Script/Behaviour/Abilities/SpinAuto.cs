@@ -11,7 +11,7 @@ namespace KarpysDev.Script.Behaviour
     public class SpinAuto : Ability
     {
         private IAnimator m_Animator = null;
-        public SpinAuto(ISource source, AbilityRule abilityRule) : base(source,abilityRule)
+        public SpinAuto(ISource source, AbilityRule abilityRule, AbilityRestriction abilityRestriction) : base(source,abilityRule, abilityRestriction)
         {
             if (source.Controller is IAnimator animator)
                 m_Animator = animator;
@@ -30,11 +30,7 @@ namespace KarpysDev.Script.Behaviour
             //Todo:Get the correct entity group
             CollisionManager.Instance.CreateCircleCollision(EntityGroup.Friendly,m_Source.Root.GetRoot(RootPosition.Root).position,ApplyDamage,CollisionType.Instant,3f);
         }
-
-        protected override bool IsSpellCanBeCast()
-        {
-            return m_Source.Controller.CastLockCount <= 0;
-        }
+        
 
         public void ApplyDamage(ITargetable targetable)
         {

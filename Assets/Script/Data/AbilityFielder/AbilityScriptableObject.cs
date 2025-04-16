@@ -23,7 +23,7 @@ namespace Script.Data.AbilityFielder
             m_FieldValues = m_AbilityField.GetFields();
         }
 
-        public Ability CreateBaseAbility(ISource source,AbilityRule rule)
+        public Ability CreateBaseAbility(ISource source,AbilityRule rule, AbilityRestriction abilityRestriction)
         {
             GenerateFields();
             Type triggerClass = StringUtils.GetTypeViaClassName(m_AbilityField.ClassName);
@@ -34,13 +34,14 @@ namespace Script.Data.AbilityFielder
                 return null;
             }
 
-            object[] abilityConstructorFields = new object[m_FieldValues.Length + 2];
+            object[] abilityConstructorFields = new object[m_FieldValues.Length + 3];
             abilityConstructorFields[0] = source;
             abilityConstructorFields[1] = rule;
+            abilityConstructorFields[2] = abilityRestriction;
 
             for (int i = 0; i < m_FieldValues.Length; i++)
             {
-                abilityConstructorFields[i+2] = m_FieldValues[i];
+                abilityConstructorFields[i+3] = m_FieldValues[i];
             }
 
             return (Ability)Activator.CreateInstance(triggerClass,abilityConstructorFields);

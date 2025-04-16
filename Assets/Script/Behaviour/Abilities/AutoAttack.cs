@@ -16,7 +16,7 @@ namespace KarpysDev.Script.Behaviour
         private IMethodDelayer m_LaunchAction = new SingleMethodDelayer();
         private bool m_IsCancelled = false;
 
-        public AutoAttack(ISource source,PlayerPointTargetableAbilityRule abilityRule,float attackSpeed,float attackLockNeeded):base(source,abilityRule)
+        public AutoAttack(ISource source, PlayerPointTargetableAbilityRule abilityRule, AbilityRestriction abilityRestriction, float attackSpeed,float attackLockNeeded):base(source,abilityRule,abilityRestriction)
         {
             if(source is EntitySource entitySource)
                 m_Entity = entitySource.Entity;
@@ -39,11 +39,6 @@ namespace KarpysDev.Script.Behaviour
                 m_Entity.Controller.StopMovement();
                 m_Entity.Controller.OnNewCommand += Cancelled;
             }
-        }
-
-        protected override bool IsSpellCanBeCast()
-        {
-            return base.IsSpellCanBeCast() && m_AutoAttackClock.IsReady;
         }
 
         private void Cancelled()
