@@ -11,17 +11,19 @@
     {
         private bool m_InPulse = false;
         private Clock m_PulseClock = null;
+        private DamageSource m_DamageSource = null;
 
         private float m_PulseDelay = 0.25f;
         private float m_PulseRadius = 1;
         private int m_MaxEnemy = 1;
 
         private int m_CurrentEnemyPulseCount = 0;
-        public TormentPulse(ISource source, AbilityRule abilityRule, AbilityRestriction abilityRestriction, float pulseDelay, float pulseRadius, int maxEnemy) : base(source, abilityRule, abilityRestriction)
+        public TormentPulse(ISource source, AbilityRule abilityRule, AbilityRestriction abilityRestriction, float pulseDelay, float pulseRadius, int maxEnemy, DamageSource baseDamageSource) : base(source, abilityRule, abilityRestriction)
         {
             m_PulseDelay = pulseDelay;
             m_PulseRadius = pulseRadius;
             m_MaxEnemy = maxEnemy;
+            m_DamageSource = baseDamageSource;
             m_PulseClock = new Clock(m_PulseDelay, TriggerPulse);
         }
 
@@ -59,7 +61,7 @@
             m_CurrentEnemyPulseCount += 1;
             
             if(targetable is IDamageTargetable damageTargetable)
-                damageTargetable.DamageReceiver.ReceiveDamage(new DamageSource(20,DamageType.Ice),m_Source);
+                damageTargetable.DamageReceiver.ReceiveDamage(m_DamageSource,m_Source);
             
             FxManager.Instance.CreateTormentPulseFx(targetable.Source.Root.GetRoot(RootPosition.Chest),m_Source.Root.GetRoot(RootPosition.Chest));
         }

@@ -24,5 +24,10 @@ MonoBehaviour:
     - m_FieldType: 0
       m_Value: 3
       m_AssemblyQualifiedName: 
+    - m_FieldType: 8
+      m_Value: Float||20|Enum|KarpysDev.Script.Damage.DamageType, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|Fire
+      m_AssemblyQualifiedName: KarpysDev.Script.Damage.DamageSource, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     m_ConstructorId: 0
     m_IgnoreParams: 3
