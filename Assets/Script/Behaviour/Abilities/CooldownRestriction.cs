@@ -2,6 +2,7 @@ namespace KarpysDev.Script.Behaviour
 {
     using global::Script;
     using KarpysUtils;
+    using UnityEngine;
 
     public class CooldownRestriction : AbilityRestriction,IUpdater
     {
@@ -37,7 +38,7 @@ namespace KarpysDev.Script.Behaviour
         public override void OnTrigger()
         {
             m_IsReady = false;
-            m_CooldownClock.SetTime(m_CooldownTime);
+            m_CooldownClock.Restart(m_CooldownTime);
         }
 
         public void Update()
