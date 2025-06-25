@@ -16,7 +16,7 @@
         private float m_SpinSpeed = 0.3f;
         private bool m_IsInSpin = false;
 
-        private Clock m_SpinClock = null;
+        private Loop m_SpinLoop = null;
         
         public SpinSpin(ISource source, AbilityRule abilityRule, AbilityRestriction abilityRestriction, float spinSpeed, int spinCount) : base(source, abilityRule, abilityRestriction)
         {
@@ -43,12 +43,12 @@
             m_IsInSpin = true;
             m_CurrentSpinCount = 0;
             Spin();
-            m_SpinClock = new Clock(m_SpinSpeed, Spin);
+            m_SpinLoop = new Loop(m_SpinSpeed, Spin);
         }
         
         private void StopSpin(bool cancelAnim)
         {
-            m_SpinClock = null;
+            m_SpinLoop = null;
             m_IsInSpin = false;
             
             if(cancelAnim)
@@ -75,10 +75,6 @@
             {
                 StopSpin(false);
             }
-            else
-            {
-                m_SpinClock?.Restart(m_SpinSpeed);
-            }
             
             CollisionManager.Instance.CreateCircleCollision(EntityGroup.Friendly,m_Source.Root.GetRoot(RootPosition.Root).position,ApplyDamage,CollisionType.Instant,3f);
         }
@@ -91,7 +87,7 @@
         
         public void Update()
         {
-            m_SpinClock?.UpdateClock();
+            m_SpinLoop?.Update();
         }
     }
 }
