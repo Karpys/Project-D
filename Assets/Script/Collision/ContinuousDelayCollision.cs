@@ -1,4 +1,4 @@
-﻿namespace KarpysDev.Script.Damage.Collision
+﻿namespace KarpysDev.Script.Collision
 {
     using Collider;
     using KarpysUtils;

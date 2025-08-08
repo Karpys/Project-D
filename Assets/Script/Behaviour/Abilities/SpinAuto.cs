@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace KarpysDev.Script.Behaviour
 {
-    using Damage.Collision;
+    using Collision;
     using Entity;
     using Player;
 

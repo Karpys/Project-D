@@ -1,7 +1,7 @@
 namespace KarpysDev.Script.Behaviour
 {
     using Damage;
-    using Damage.Collision;
+    using Collision;
     using Entity;
     using Projectile;
     using UnityEngine;
