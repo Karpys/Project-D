@@ -9,6 +9,7 @@ namespace KarpysDev.Script.Player
         [SerializeField] private PlayerEntity m_PlayerEntity = null;
         [SerializeField] private Camera m_PointCamera = null;
         [SerializeField] protected LayerMask m_EnemyLayerMask;
+        [SerializeField] protected Rigidbody m_Rigidbody = null;
         
         private string m_LastCommandId = String.Empty;
         protected override void EntityActionUpdate()
@@ -23,6 +24,14 @@ namespace KarpysDev.Script.Player
                 OnNewCommand?.Invoke();
             m_LastCommandId = newCommandId;
         }
+
+        protected override void MoveTo(Vector3 destination)
+        {
+            Vector3 dir = (destination - transform.position).normalized;
+            m_Rigidbody.velocity = dir * m_Speed;
+            Debug.Log(m_Rigidbody.velocity);
+        }
+
         private void PlayerInput()
         {
             if (Input.GetMouseButton(1))
@@ -102,10 +111,8 @@ namespace KarpysDev.Script.Player
         protected override void OnTargetReached()
         {
             base.OnTargetReached();
-
             m_EntityAnimator.PlayOrContinueBotAnimation("Idle",0.25f);
             return;
-            TryLaunchAutoAttack();
         }
         
         private void TryLaunchAutoAttack()

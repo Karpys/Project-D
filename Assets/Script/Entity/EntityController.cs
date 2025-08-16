@@ -44,15 +44,8 @@ namespace KarpysDev.Script.Player
             LateUpdate();
         }
 
-        protected virtual void EntityActionUpdate()
+        protected void FixedUpdate()
         {
-            if (m_OverrideBehaviorCommand != null)
-            {
-                Debug.Log("execute override command");
-                m_OverrideBehaviorCommand.Execute();
-                return;
-            }
-                
             if (m_NeedToReachDestination)
             {
                 if(m_CurrentTargetable == null)
@@ -61,6 +54,16 @@ namespace KarpysDev.Script.Player
                 {
                     MoveTowardsTarget();
                 }
+            }
+        }
+
+        protected virtual void EntityActionUpdate()
+        {
+            if (m_OverrideBehaviorCommand != null)
+            {
+                Debug.Log("execute override command");
+                m_OverrideBehaviorCommand.Execute();
+                return;
             }
         }
 
@@ -75,7 +78,7 @@ namespace KarpysDev.Script.Player
             if(m_MovementLockCount > 0)
                 return;
             
-            Vector3 newDestination = Vector3.MoveTowards(transform.position,m_Destination,m_Speed * Time.deltaTime);
+            Vector3 newDestination = Vector3.MoveTowards(transform.position,m_Destination,m_Speed * Time.fixedDeltaTime);
 
             if (Vector3.Distance(transform.position, m_Destination) <= m_DistanceToStop)
             {
@@ -84,8 +87,13 @@ namespace KarpysDev.Script.Player
             }
             else
             {
-                transform.position = newDestination;
+                MoveTo(newDestination);
             }
+        }
+
+        protected virtual void MoveTo(Vector3 destination)
+        {
+            transform.position = destination;
         }
         
         public void MoveTowardsTarget()
@@ -101,7 +109,7 @@ namespace KarpysDev.Script.Player
             }
             else
             {
-                transform.position = newDestination;
+                MoveTo(newDestination);
             }
         }
 

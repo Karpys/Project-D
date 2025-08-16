@@ -2584,6 +2584,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &2051740931 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 1593377660186565382, guid: 88e3f9d7633d95a40853d1c76bf2ff6d, type: 3}
+  m_PrefabInstance: {fileID: 939207989860325637}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &939207989860325637
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2601,7 +2606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 939207989913327857, guid: 88e3f9d7633d95a40853d1c76bf2ff6d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -7.97
       objectReference: {fileID: 0}
     - target: {fileID: 939207989913327857, guid: 88e3f9d7633d95a40853d1c76bf2ff6d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2663,6 +2668,14 @@ PrefabInstance:
       propertyPath: m_BackGroundColor.r
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2185555139029155111, guid: 88e3f9d7633d95a40853d1c76bf2ff6d, type: 3}
+      propertyPath: m_Speed
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185555139029155111, guid: 88e3f9d7633d95a40853d1c76bf2ff6d, type: 3}
+      propertyPath: m_Rigidbody
+      value: 
+      objectReference: {fileID: 2051740931}
     - target: {fileID: 7134173555516631760, guid: 88e3f9d7633d95a40853d1c76bf2ff6d, type: 3}
       propertyPath: m_SpinSpinAbilityScriptableObject
       value: 
