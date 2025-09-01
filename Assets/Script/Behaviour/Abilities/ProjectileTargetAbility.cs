@@ -1,7 +1,6 @@
 namespace KarpysDev.Script.Behaviour
 {
     using Damage;
-    using Collision;
     using Entity;
     using Projectile;
     using UnityEngine;
@@ -26,7 +25,7 @@ namespace KarpysDev.Script.Behaviour
             destination.y = spawnPosition.y;
             proj.Initialize(m_Source);
             proj.SetDestination(destination);
-            CollisionManager.Instance.CreateCircleCollision(EntityGroup.Friendly, proj.transform.position, proj.OnCollision, CollisionType.Continuous, 1, proj.transform);
+            //CollisionManager.Instance.CreateCircleCollision(EntityGroup.Friendly, proj.transform.position, proj.OnCollision, CollisionType.Continuous, 1, proj.transform);
         }
     }
 }

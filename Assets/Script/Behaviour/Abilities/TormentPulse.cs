@@ -1,7 +1,6 @@
 ﻿namespace KarpysDev.Script.Behaviour
 {
     using Damage;
-    using Collision;
     using Entity;
     using global::Script.Fx;
     using KarpysUtils;
@@ -49,8 +48,8 @@
             m_PulseClock.Restart(m_PulseDelay);
             m_CurrentEnemyPulseCount = 0;
             //Directly Check Surrounding enemies instead of create collision
-            CollisionManager.Instance.CreateCircleCollision(EntityGroup.Enemy,m_Source.Root.GetRoot(RootPosition.Root).position,OnCollision
-                ,CollisionType.Instant,m_PulseRadius);
+            //CollisionManager.Instance.CreateCircleCollision(EntityGroup.Enemy,m_Source.Root.GetRoot(RootPosition.Root).position,OnCollision
+                //,CollisionType.Instant,m_PulseRadius);
         }
 
         private void OnCollision(ITargetable targetable)

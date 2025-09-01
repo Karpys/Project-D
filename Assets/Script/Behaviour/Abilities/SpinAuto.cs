@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace KarpysDev.Script.Behaviour
 {
-    using Collision;
     using Entity;
     using Player;
 
@@ -28,7 +27,7 @@ namespace KarpysDev.Script.Behaviour
             });
             
             //Todo:Get the correct entity group
-            CollisionManager.Instance.CreateCircleCollision(EntityGroup.Friendly,m_Source.Root.GetRoot(RootPosition.Root).position,ApplyDamage,CollisionType.Instant,3f);
+            //CollisionManager.Instance.CreateCircleCollision(EntityGroup.Friendly,m_Source.Root.GetRoot(RootPosition.Root).position,ApplyDamage,CollisionType.Instant,3f);
         }
         
 

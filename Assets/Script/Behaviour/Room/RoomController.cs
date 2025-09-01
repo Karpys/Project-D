@@ -1,13 +1,11 @@
 ﻿namespace KarpysDev.Script.Behaviour.Room
 {
-    using Collision;
     using Entity;
     using Player;
     using UnityEngine;
 
     public class RoomController : MonoBehaviour
     {
-        [SerializeField] private BaseCollision m_FrontGateCollision = null;
         [SerializeField] private Animator m_Animator = null;
         
         public void TryOpenRoom(ITargetable contact)

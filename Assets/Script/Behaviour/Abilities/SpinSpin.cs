@@ -1,7 +1,6 @@
 ﻿namespace KarpysDev.Script.Behaviour
 {
     using Damage;
-    using Collision;
     using Entity;
     using KarpysUtils;
     using KarpysUtils.TweenCustom;
@@ -76,7 +75,7 @@
                 StopSpin(false);
             }
             
-            CollisionManager.Instance.CreateCircleCollision(EntityGroup.Friendly,m_Source.Root.GetRoot(RootPosition.Root).position,ApplyDamage,CollisionType.Instant,3f);
+            //CollisionManager.Instance.CreateCircleCollision(EntityGroup.Friendly,m_Source.Root.GetRoot(RootPosition.Root).position,ApplyDamage,CollisionType.Instant,3f);
         }
 
         private void ApplyDamage(ITargetable targetable)

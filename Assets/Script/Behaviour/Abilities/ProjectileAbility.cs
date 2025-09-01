@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace KarpysDev.Script.Behaviour
 {
-    using Collision;
     using Entity;
     using Player;
 
@@ -54,7 +53,7 @@ namespace KarpysDev.Script.Behaviour
             BaseProjectile proj = GameObject.Instantiate(m_ProjectilePrefab, spawnPosition, Quaternion.identity);
             proj.Initialize(m_Source);
             proj.SetDestination(m_GroundCastAbilityRule.GroundHitPosition + new Vector3(0,spawnPosition.y,0));
-            CollisionManager.Instance.CreateCircleCollision(EntityGroup.Friendly, proj.transform.position, proj.OnCollision, CollisionType.Continuous, 1, proj.transform);
+            //CollisionManager.Instance.CreateCircleCollision(EntityGroup.Friendly, proj.transform.position, proj.OnCollision, CollisionType.Continuous, 1, proj.transform);
         }
 
         public void Update()
