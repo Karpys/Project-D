@@ -1,23 +1,19 @@
 ﻿namespace KarpysDev.Script.Behaviour.Room
 {
-    using Entity;
-    using Player;
     using UnityEngine;
 
     public class RoomController : MonoBehaviour
     {
         [SerializeField] private Animator m_Animator = null;
         
-        public void TryOpenRoom(ITargetable contact)
+        public void TryOpenRoom()
         {
-            if(contact.Source.Root.GetRoot(RootPosition.Root).CompareTag("Player"))
-                OpenRoom();
+            OpenRoom();
         }
         
-        public void TryCloseRoom(ITargetable contact)
+        public void TryCloseRoom()
         {
-            if(contact.Source.Root.GetRoot(RootPosition.Root).CompareTag("Player"))
-                CloseRoom();
+            CloseRoom();
         }
 
         private void OpenRoom()

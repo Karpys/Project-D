@@ -32,7 +32,7 @@ namespace KarpysDev.Script.Behaviour
         {
             base.Awake();
             m_AutoAttack = new AutoAttack(m_Source,new PlayerPointTargetableAbilityRule(transform,m_AttackRange,m_Controller), new NoRestriction(),0.5f,0.2f);
-            m_SpinAuto = new SpinAuto(m_Source,new NoRule(), new CooldownRestriction(5));
+            m_SpinAuto = new SpinAuto(m_Source,new NoRule(), new CooldownRestriction(0.5f));
             //Add Spell Rule Giver, interface giver of GroundCast PlayerPoint ect//
             m_Projectile = m_ProjectileAbilityScriptableObject.CreateBaseAbility(m_Source, new GroundCastAbilityRule(), new NoRestriction());
             m_ProjectileTarget = m_ProjectileTargetAbilityScriptableObject.CreateBaseAbility(m_Source, new PlayerPointTargetableAbilityRule(transform, m_AttackRange, m_Controller), new NoRestriction());

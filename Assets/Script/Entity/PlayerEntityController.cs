@@ -29,7 +29,6 @@ namespace KarpysDev.Script.Player
         {
             Vector3 dir = (destination - transform.position).normalized;
             m_Rigidbody.velocity = dir * m_Speed;
-            Debug.Log(m_Rigidbody.velocity);
         }
 
         private void PlayerInput()
@@ -97,6 +96,12 @@ namespace KarpysDev.Script.Player
                 m_CurrentTargetable = null;
                 m_LookAt.SetTarget(null);
             }
+        }
+
+        protected override void Stop()
+        {
+            base.Stop();
+            m_Rigidbody.velocity = Vector3.zero;
         }
 
         public override void SetTarget(ITargetable targetable)

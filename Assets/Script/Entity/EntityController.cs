@@ -82,8 +82,7 @@ namespace KarpysDev.Script.Player
 
             if (Vector3.Distance(transform.position, m_Destination) <= m_DistanceToStop)
             {
-                m_NeedToReachDestination = false;
-                m_EntityAnimator.PlayBotAnimation("Idle");
+                Stop();
             }
             else
             {
@@ -91,6 +90,12 @@ namespace KarpysDev.Script.Player
             }
         }
 
+        protected virtual void Stop()
+        {
+            m_NeedToReachDestination = false;
+            m_EntityAnimator.PlayBotAnimation("Idle");
+        }
+        
         protected virtual void MoveTo(Vector3 destination)
         {
             transform.position = destination;
