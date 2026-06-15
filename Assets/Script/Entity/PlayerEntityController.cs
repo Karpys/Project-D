@@ -28,7 +28,7 @@ namespace KarpysDev.Script.Player
         protected override void MoveTo(Vector3 destination)
         {
             Vector3 dir = (destination - transform.position).normalized;
-            m_Rigidbody.velocity = dir * m_Speed;
+            m_Rigidbody.linearVelocity = dir * m_Speed;
         }
 
         private void PlayerInput()
@@ -101,7 +101,7 @@ namespace KarpysDev.Script.Player
         protected override void Stop()
         {
             base.Stop();
-            m_Rigidbody.velocity = Vector3.zero;
+            m_Rigidbody.linearVelocity = Vector3.zero;
         }
 
         public override void SetTarget(ITargetable targetable)
