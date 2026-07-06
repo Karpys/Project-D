@@ -134,7 +134,7 @@ namespace KarpysDev.Script.Player
         {
             m_NeedToReachDestination = false;
             m_Destination = transform.position;
-            m_EntityAnimator.PlayOrContinueBotAnimation("Idle",.25f);
+            Stop();
         }
 
         public void StartMovement()
